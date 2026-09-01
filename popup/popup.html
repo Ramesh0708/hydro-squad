@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hydro Squad</title>
+    <link rel="stylesheet" href="popup.css" />
+    <link rel="stylesheet" href="../dew/dew.css" />
+  </head>
+  <body>
+    <main id="app">
+      <section id="onboard" class="screen hidden">
+        <p class="eyebrow">meet your roommate</p>
+        <div class="dew big" data-mood="wave" aria-hidden="true"></div>
+        <h1>I’m Dew.</h1>
+        <p class="lede">
+          I live in your browser. I bully you about water, yank you toward
+          breakfast, lunch, snack, dinner, and a midnight bite — and if today
+          is a fasting day, I say so. Teams can keep the menu.
+        </p>
+        <label class="field">
+          What should I call you?
+          <input id="name" maxlength="18" placeholder="legend" />
+        </label>
+        <p class="field-label">How often should I bother you?</p>
+        <div class="pills" id="intervals">
+          <button data-interval="30">Coffee</button>
+          <button data-interval="45" class="on">Meetings</button>
+          <button data-interval="60">Deep work</button>
+          <button data-interval="90">Cactus mode</button>
+        </div>
+        <p class="field-label">Pick my personality</p>
+        <div class="pills" id="personalities">
+          <button data-personality="gentle">Soft</button>
+          <button data-personality="roast" class="on">Roast</button>
+          <button data-personality="chaos">Chaos</button>
+        </div>
+        <button id="start" class="primary">Let Dew move in</button>
+      </section>
+
+      <section id="home" class="screen hidden">
+        <header>
+          <div>
+            <p class="eyebrow" id="rank">Puddle</p>
+            <h1 id="hello">Hey.</h1>
+          </div>
+          <button id="settings-btn" class="ghost" title="Settings">⚙</button>
+        </header>
+
+        <div class="stage">
+          <div id="dew" class="dew" data-mood="ok" title="Poke Dew"></div>
+          <p id="mood-tag" class="mood-tag">vibing</p>
+          <p id="status" class="bubble">Loading the drama…</p>
+        </div>
+
+        <div class="meter">
+          <div class="meter-track">
+            <div id="fill" class="meter-fill"></div>
+          </div>
+          <p id="meter-copy">0 / 8 sips today</p>
+        </div>
+
+        <div id="fast-banner" class="fast-banner hidden">
+          <strong id="day-title">Fasting day</strong>
+          <span id="fast-reason"></span>
+        </div>
+
+        <div class="meal-card">
+          <p class="eyebrow" id="meal-label">Next plate</p>
+          <p id="meal-when">—</p>
+          <div class="meal-actions">
+            <button id="ate" class="secondary">I ate</button>
+            <button id="honor" class="secondary hidden">I’m fasting — skip food</button>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div>
+            <strong id="streak">0</strong>
+            <span>day streak</span>
+          </div>
+          <div>
+            <strong id="next">—</strong>
+            <span>until next sip</span>
+          </div>
+        </div>
+
+        <button id="sip" class="primary splash">I sipped</button>
+        <button id="snooze" class="secondary">Give me 10 minutes, Dew</button>
+      </section>
+
+      <section id="settings" class="screen hidden">
+        <header>
+          <h1>House rules</h1>
+          <button id="back" class="ghost">←</button>
+        </header>
+        <p class="field-label">Nudge rhythm</p>
+        <div class="pills" id="set-intervals">
+          <button data-interval="30">30m</button>
+          <button data-interval="45">45m</button>
+          <button data-interval="60">60m</button>
+          <button data-interval="90">90m</button>
+        </div>
+        <p class="field-label">Dew’s vibe</p>
+        <div class="pills" id="set-personalities">
+          <button data-personality="gentle">Soft</button>
+          <button data-personality="roast">Roast</button>
+          <button data-personality="chaos">Chaos</button>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="overlay" checked />
+          Let Dew appear on websites when you’re overdue for water or food
+        </label>
+
+        <p class="field-label">Office meals (menu still lives in Teams)</p>
+        <label class="toggle">
+          <input type="checkbox" id="meals-on" checked />
+          Bell at breakfast, lunch, snack, dinner, midnight
+        </label>
+        <div id="meal-times" class="meal-times"></div>
+
+        <p class="field-label">Today is a fasting day</p>
+        <label class="toggle">
+          <input type="checkbox" id="fast-today" />
+          Mark today — Dew will caution observers not to eat
+        </label>
+        <label class="field">
+          What kind of fast?
+          <input id="fast-label" maxlength="40" placeholder="Ekadashi, Navratri, office vrath…" />
+        </label>
+
+        <p class="field-label">Weekly fasts</p>
+        <div class="pills" id="weekdays"></div>
+
+        <label class="toggle">
+          <input type="checkbox" id="observe" />
+          I personally observe these fasts — don’t push food at me
+        </label>
+
+        <p class="field-label">Special fasting dates</p>
+        <div class="date-row">
+          <input id="fast-date" type="date" />
+          <input id="fast-date-label" maxlength="32" placeholder="Name" />
+          <button id="add-fast" class="secondary" type="button">Add</button>
+        </div>
+        <div id="fast-list" class="fast-list"></div>
+
+        <p class="hint">
+          Dew does not replace the Power Automate menu. Dew just grabs people
+          who never open Teams. Same folder for Chrome and Edge.
+        </p>
+      </section>
+    </main>
+    <script src="../meals.js"></script>
+    <script src="../dew/dew.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

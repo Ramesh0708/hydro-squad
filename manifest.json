@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Hydro Squad",
+  "version": "1.3.0",
+  "description": "Dew nags the office about water and meals, and warns on fasting days.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "Hydro Squad — sip for Dew",
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "alarms", "notifications"],
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["meals.js", "dew/dew.js", "overlay/overlay.js"],
+      "css": ["overlay/overlay.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["dew/dew.css", "office-fasts.json"],
+      "matches": ["http://*/*", "https://*/*"]
+    }
+  ]
+}

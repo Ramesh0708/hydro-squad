@@ -1,0 +1,564 @@
+.dew {
+  --dew-a: #dcffff;
+  --dew-b: #4fd4e0;
+  --dew-c: #148ea3;
+  width: 92px;
+  height: 118px;
+  position: relative;
+  animation: dew-bob 2.6s ease-in-out infinite;
+  cursor: pointer;
+}
+
+.dew.big {
+  width: 110px;
+  height: 140px;
+  margin: 8px auto 6px;
+}
+
+.dew-body {
+  width: 100%;
+  height: 100%;
+  border-radius: 48% 48% 46% 46%;
+  background: radial-gradient(circle at 35% 20%, var(--dew-a), var(--dew-b) 42%, var(--dew-c));
+  box-shadow: inset -12px -18px 20px rgba(8, 50, 58, 0.25), 0 18px 40px rgba(0, 0, 0, 0.28);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.35s ease, filter 0.35s ease;
+}
+
+.dew .shine {
+  position: absolute;
+  top: 16%;
+  left: 22%;
+  width: 22px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  transform: rotate(-18deg);
+}
+
+.dew .eye {
+  position: absolute;
+  top: 42%;
+  width: 11px;
+  height: 16px;
+  background: #083038;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dew .eye.left {
+  left: 27%;
+}
+
+.dew .eye.right {
+  right: 27%;
+}
+
+.dew .pupil {
+  display: block;
+  width: 4px;
+  height: 5px;
+  margin: 4px 0 0 5px;
+  background: #e8fff8;
+  border-radius: 50%;
+}
+
+.dew .brow {
+  position: absolute;
+  top: 34%;
+  width: 14px;
+  height: 3px;
+  background: #083038;
+  border-radius: 4px;
+  opacity: 0.9;
+}
+
+.dew .brow.left {
+  left: 26%;
+  transform: rotate(8deg);
+}
+
+.dew .brow.right {
+  right: 26%;
+  transform: rotate(-8deg);
+}
+
+.dew .mouth {
+  position: absolute;
+  left: 50%;
+  top: 64%;
+  width: 16px;
+  height: 8px;
+  margin-left: -8px;
+  border: 2.5px solid #083038;
+  border-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.dew .blush {
+  position: absolute;
+  top: 58%;
+  width: 10px;
+  height: 6px;
+  background: rgba(255, 120, 140, 0.45);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.dew .blush.left {
+  left: 16%;
+}
+
+.dew .blush.right {
+  right: 16%;
+}
+
+.dew .sweat,
+.dew .spark,
+.dew .steam {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.dew .sweat {
+  top: 10%;
+  right: 8%;
+  width: 8px;
+  height: 14px;
+  background: #9be7ff;
+  border-radius: 80% 0 60% 40%;
+}
+
+.dew .spark {
+  top: -6%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  background: #fff59a;
+  clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.dew .steam {
+  top: -8%;
+  left: 18%;
+  width: 8px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.dew[data-mood="ok"] .eye {
+  animation: dew-blink 4.2s infinite;
+}
+
+.dew[data-mood="wink"] .eye.right {
+  height: 3px;
+  top: 48%;
+  border-radius: 4px;
+}
+
+.dew[data-mood="wink"] .mouth {
+  width: 18px;
+  margin-left: -9px;
+}
+
+.dew[data-mood="smug"] {
+  --dew-a: #e7fff4;
+  --dew-b: #7ee0c4;
+  --dew-c: #1a9b86;
+}
+
+.dew[data-mood="smug"] .brow.left {
+  transform: rotate(-16deg);
+  top: 36%;
+}
+
+.dew[data-mood="smug"] .brow.right {
+  transform: rotate(16deg);
+}
+
+.dew[data-mood="smug"] .mouth {
+  width: 14px;
+  height: 6px;
+  left: 56%;
+}
+
+.dew[data-mood="love"] {
+  --dew-a: #fff0f6;
+  --dew-b: #ff9ec4;
+  --dew-c: #e45d8c;
+  animation: dew-bob 1.4s ease-in-out infinite;
+}
+
+.dew[data-mood="love"] .blush,
+.dew[data-mood="happy"] .blush,
+.dew[data-mood="wink"] .blush {
+  opacity: 1;
+}
+
+.dew[data-mood="love"] .spark {
+  opacity: 1;
+  animation: dew-spark 0.9s ease-in-out infinite;
+}
+
+.dew[data-mood="love"] .mouth,
+.dew[data-mood="happy"] .mouth {
+  width: 20px;
+  height: 12px;
+  margin-left: -8px;
+  background: #083038;
+  border: 0;
+  border-radius: 0 0 16px 16px;
+}
+
+.dew[data-mood="happy"] {
+  --dew-a: #ffffff;
+  --dew-b: #8cf0c8;
+  --dew-c: #2fb89a;
+  animation: dew-pop 0.55s ease, dew-bob 1.6s ease-in-out 0.55s infinite;
+}
+
+.dew[data-mood="festive"] {
+  --dew-a: #fff7d6;
+  --dew-b: #ffd36a;
+  --dew-c: #e08a2a;
+  animation: dew-bob 1.5s ease-in-out infinite;
+}
+
+.dew[data-mood="festive"] .spark {
+  opacity: 1;
+  animation: dew-spark 0.8s ease-in-out infinite;
+}
+
+.dew[data-mood="festive"] .blush {
+  opacity: 1;
+}
+
+.dew[data-mood="festive"] .mouth {
+  width: 20px;
+  height: 12px;
+  margin-left: -8px;
+  background: #083038;
+  border: 0;
+  border-radius: 0 0 16px 16px;
+}
+
+.dew[data-mood="fasting"] {
+  --dew-a: #fff6e4;
+  --dew-b: #f0c27a;
+  --dew-c: #b86a24;
+  animation: dew-bob 3.4s ease-in-out infinite;
+}
+
+.dew[data-mood="fasting"] .eye {
+  height: 4px;
+  top: 48%;
+  border-radius: 4px;
+}
+
+.dew[data-mood="fasting"] .mouth {
+  width: 12px;
+  height: 4px;
+  border-width: 2px 0 0;
+  border-radius: 0;
+}
+
+.dew[data-mood="hungry"] {
+  --dew-a: #fff3d6;
+  --dew-b: #ffb347;
+  --dew-c: #e0672f;
+  animation: dew-shake 0.9s ease-in-out infinite;
+}
+
+.dew[data-mood="hungry"] .mouth {
+  width: 18px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0;
+  background: #083038;
+}
+
+.dew[data-mood="sleepy"] {
+  --dew-a: #dce8ff;
+  --dew-b: #8aa4d8;
+  --dew-c: #4b5f96;
+  animation: dew-bob 4.4s ease-in-out infinite;
+}
+
+.dew[data-mood="sleepy"] .eye {
+  height: 4px;
+  top: 48%;
+  border-radius: 4px;
+}
+
+.dew[data-mood="sleepy"] .mouth {
+  height: 4px;
+  border-radius: 8px;
+  border-width: 2px;
+}
+
+.dew[data-mood="sleepy"] .steam {
+  opacity: 1;
+  animation: dew-steam 1.6s ease-in-out infinite;
+}
+
+.dew[data-mood="judging"] .eye.left {
+  transform: translate(3px, 2px);
+}
+
+.dew[data-mood="judging"] .eye.right {
+  transform: translate(4px, 2px);
+}
+
+.dew[data-mood="judging"] .brow.left {
+  transform: rotate(-18deg);
+}
+
+.dew[data-mood="judging"] .brow.right {
+  transform: rotate(22deg);
+  top: 32%;
+}
+
+.dew[data-mood="judging"] .mouth {
+  width: 10px;
+  height: 3px;
+  border-radius: 4px;
+  border-width: 2px 0 0;
+}
+
+.dew[data-mood="thirsty"] {
+  --dew-a: #fff4e8;
+  --dew-b: #ffb08a;
+  --dew-c: #e56b63;
+  animation: dew-shake 0.7s ease-in-out infinite;
+}
+
+.dew[data-mood="thirsty"] .eye {
+  height: 6px;
+  top: 46%;
+}
+
+.dew[data-mood="thirsty"] .sweat {
+  opacity: 1;
+  animation: dew-drip 1s ease-in-out infinite;
+}
+
+.dew[data-mood="thirsty"] .mouth {
+  top: 62%;
+  height: 10px;
+  border-radius: 12px 12px 0 0;
+  border: 2.5px solid #083038;
+  border-bottom: 0;
+}
+
+.dew[data-mood="dramatic"] {
+  --dew-a: #ffe8f2;
+  --dew-b: #ff8fb0;
+  --dew-c: #c43d6a;
+  animation: dew-wobble 0.55s ease-in-out infinite;
+}
+
+.dew[data-mood="dramatic"] .eye {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  top: 40%;
+}
+
+.dew[data-mood="dramatic"] .mouth {
+  width: 18px;
+  height: 14px;
+  border-radius: 50%;
+  border: 0;
+  background: #083038;
+}
+
+.dew[data-mood="dramatic"] .sweat {
+  opacity: 1;
+}
+
+.dew[data-mood="feral"] {
+  --dew-a: #fff3c4;
+  --dew-b: #ff7a45;
+  --dew-c: #c42828;
+  animation: dew-rage 0.35s linear infinite;
+  filter: saturate(1.25);
+}
+
+.dew[data-mood="feral"] .eye {
+  width: 16px;
+  height: 8px;
+  top: 44%;
+  border-radius: 2px;
+  background: #2b0404;
+}
+
+.dew[data-mood="feral"] .brow.left {
+  transform: rotate(-28deg);
+  top: 30%;
+}
+
+.dew[data-mood="feral"] .brow.right {
+  transform: rotate(28deg);
+  top: 30%;
+}
+
+.dew[data-mood="feral"] .mouth {
+  width: 22px;
+  height: 10px;
+  margin-left: -11px;
+  border: 0;
+  background: #2b0404;
+  border-radius: 4px 4px 10px 10px;
+}
+
+.dew[data-mood="dizzy"] .eye {
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  background:
+    repeating-conic-gradient(#083038 0 25%, #e8fff8 0 50%);
+  animation: dew-spin 0.6s linear infinite;
+}
+
+.dew[data-mood="dizzy"] .mouth {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 0;
+  background: #083038;
+}
+
+.dew[data-mood="sideeye"] .eye.left,
+.dew[data-mood="sideeye"] .pupil {
+  transform: translateX(4px);
+}
+
+.dew[data-mood="sideeye"] .eye.right .pupil {
+  margin-left: 7px;
+}
+
+.dew[data-mood="wave"] {
+  animation: dew-tilt 0.8s ease-in-out infinite;
+}
+
+@keyframes dew-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes dew-shake {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+@keyframes dew-wobble {
+  0%,
+  100% {
+    transform: rotate(-8deg) scale(1.02);
+  }
+  50% {
+    transform: rotate(8deg) scale(1.04);
+  }
+}
+
+@keyframes dew-rage {
+  0% {
+    transform: translate(-2px, 1px);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+  100% {
+    transform: translate(-2px, 1px);
+  }
+}
+
+@keyframes dew-pop {
+  0% {
+    transform: scale(0.8);
+  }
+  60% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes dew-blink {
+  0%,
+  92%,
+  100% {
+    height: 16px;
+  }
+  96% {
+    height: 2px;
+    margin-top: 7px;
+  }
+}
+
+@keyframes dew-drip {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(6px);
+    opacity: 1;
+  }
+}
+
+@keyframes dew-spark {
+  0%,
+  100% {
+    transform: scale(0.7) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(20deg);
+  }
+}
+
+@keyframes dew-steam {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-6px);
+    opacity: 0.8;
+  }
+}
+
+@keyframes dew-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dew-tilt {
+  0%,
+  100% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(12deg);
+  }
+}

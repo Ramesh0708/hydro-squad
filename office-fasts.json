@@ -1,0 +1,855 @@
+{
+  "region": "India office calendar — Hindu, Muslim, Christian, Sikh, Jain, Jewish, Buddhist. Ramadan uses India moon-sighting; Hindu/Jain tithis use New Delhi panchang.",
+  "year": 2026,
+  "note": "mode=fast means caution observers not to eat. festive means greet and eat. fast-and-festive does both. Dates can shift by a day by city and tradition.",
+  "weekdays": [],
+  "dates": [
+    {
+      "date": "2026-01-14",
+      "label": "Shattila Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-01-29",
+      "label": "Jaya Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-13",
+      "label": "Vijaya Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-15",
+      "label": "Maha Shivaratri",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-19",
+      "label": "Ramadan Roza (day 1)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-20",
+      "label": "Ramadan Roza (day 2)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-21",
+      "label": "Ramadan Roza (day 3)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-22",
+      "label": "Ramadan Roza (day 4)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-23",
+      "label": "Ramadan Roza (day 5)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-24",
+      "label": "Ramadan Roza (day 6)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-25",
+      "label": "Ramadan Roza (day 7)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-26",
+      "label": "Ramadan Roza (day 8)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-27",
+      "label": "Ramadan Roza (day 9) + Amalaki Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-02-28",
+      "label": "Ramadan Roza (day 10)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-01",
+      "label": "Ramadan Roza (day 11)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-02",
+      "label": "Ramadan Roza (day 12)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-03",
+      "label": "Ramadan Roza (day 13)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-04",
+      "label": "Ramadan Roza (day 14)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-05",
+      "label": "Ramadan Roza (day 15)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-06",
+      "label": "Ramadan Roza (day 16)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-07",
+      "label": "Ramadan Roza (day 17)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-08",
+      "label": "Ramadan Roza (day 18)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-09",
+      "label": "Ramadan Roza (day 19)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-10",
+      "label": "Ramadan Roza (day 20)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-11",
+      "label": "Ramadan Roza (day 21)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-12",
+      "label": "Ramadan Roza (day 22)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-13",
+      "label": "Ramadan Roza (day 23)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-14",
+      "label": "Ramadan Roza (day 24)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-15",
+      "label": "Ramadan Roza (day 25) + Papamochani Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-16",
+      "label": "Ramadan Roza (day 26)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-17",
+      "label": "Ramadan Roza (day 27)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-18",
+      "label": "Ramadan Roza (day 28)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-19",
+      "label": "Ramadan Roza (day 29) + Chaitra Navratri (day 1)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-20",
+      "label": "Ramadan Roza (day 30) + Chaitra Navratri (day 2)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-21",
+      "label": "Chaitra Navratri (day 3)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-22",
+      "label": "Chaitra Navratri (day 4)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-23",
+      "label": "Chaitra Navratri (day 5)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-24",
+      "label": "Chaitra Navratri (day 6)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-25",
+      "label": "Chaitra Navratri (day 7)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-26",
+      "label": "Chaitra Navratri (day 8)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-27",
+      "label": "Chaitra Navratri (day 9)",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-03-29",
+      "label": "Kamada Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-04-03",
+      "label": "Good Friday",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-04-14",
+      "label": "Varuthini Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-04-27",
+      "label": "Mohini Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-05-13",
+      "label": "Apara Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-05-27",
+      "label": "Padmini Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-06-11",
+      "label": "Parama Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-06-25",
+      "label": "Nirjala Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-07-10",
+      "label": "Yogini Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-07-25",
+      "label": "Devshayani Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-08-09",
+      "label": "Kamika Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-08-23",
+      "label": "Shravana Putrada Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-09-04",
+      "label": "Krishna Janmashtami",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Happy Janmashtami. If you are fasting till midnight, Dew will not shove lunch at you."
+    },
+    {
+      "date": "2026-09-05",
+      "label": "Dahi Handi / Nandotsav",
+      "faith": "Hindu",
+      "mode": "festive",
+      "greeting": "Happy Dahi Handi. Eat, share, Dew is on festival duty."
+    },
+    {
+      "date": "2026-09-07",
+      "label": "Aja Ekadashi",
+      "faith": "Hindu",
+      "mode": "fast",
+      "greeting": "Aja Ekadashi. If you observe, skip grains. Everyone else, the canteen is still real."
+    },
+    {
+      "date": "2026-09-08",
+      "label": "Paryushan (day 1)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Micchami Dukkadam season. Paryushan — if you are fasting, Dew steps back. If not, eat kindly."
+    },
+    {
+      "date": "2026-09-09",
+      "label": "Paryushan (day 2)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Micchami Dukkadam season. Paryushan — if you are fasting, Dew steps back. If not, eat kindly."
+    },
+    {
+      "date": "2026-09-10",
+      "label": "Paryushan (day 3)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Micchami Dukkadam season. Paryushan — if you are fasting, Dew steps back. If not, eat kindly."
+    },
+    {
+      "date": "2026-09-11",
+      "label": "Paryushan (day 4) + Rosh Hashanah (begins at sundown)",
+      "faith": "Jain, Jewish",
+      "mode": "fast-and-festive",
+      "greeting": "Shanah Tovah, and Paryushan. If you are fasting, Dew steps back. If you are celebrating the new year, eat sweet."
+    },
+    {
+      "date": "2026-09-12",
+      "label": "Paryushan (day 5) + Rosh Hashanah",
+      "faith": "Jain, Jewish",
+      "mode": "fast-and-festive",
+      "greeting": "Shanah Tovah. Paryushan continues. Fast if that is you; feast if that is you. Dew can hold both."
+    },
+    {
+      "date": "2026-09-13",
+      "label": "Paryushan (day 6) + Rosh Hashanah",
+      "faith": "Jain, Jewish",
+      "mode": "fast-and-festive",
+      "greeting": "Shanah Tovah. Paryushan continues. Dew will not peer-pressure the plate."
+    },
+    {
+      "date": "2026-09-14",
+      "label": "Paryushan (day 7) + Ganesh Chaturthi + Hartalika Teej",
+      "faith": "Jain, Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Ganpati Bappa Morya. Paryushan and Teej too. Fast if you observe; feast for Ganesh if that is you."
+    },
+    {
+      "date": "2026-09-15",
+      "label": "Paryushan / Kshamavani / Samvatsari",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Micchami Dukkadam. Forgive and be forgiven. If you are fasting today, Dew will not push food."
+    },
+    {
+      "date": "2026-09-16",
+      "label": "Das Lakshan Parva (day 1)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Das Lakshan Parva. Digambar Jain observance — skip meals if that is your practice."
+    },
+    {
+      "date": "2026-09-17",
+      "label": "Das Lakshan Parva (day 2)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Das Lakshan Parva. Digambar Jain observance — skip meals if that is your practice."
+    },
+    {
+      "date": "2026-09-18",
+      "label": "Das Lakshan Parva (day 3)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Das Lakshan Parva. Digambar Jain observance — skip meals if that is your practice."
+    },
+    {
+      "date": "2026-09-19",
+      "label": "Das Lakshan Parva (day 4)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Das Lakshan Parva. Digambar Jain observance — skip meals if that is your practice."
+    },
+    {
+      "date": "2026-09-20",
+      "label": "Das Lakshan Parva (day 5) + Yom Kippur (begins at sundown)",
+      "faith": "Jain, Jewish",
+      "mode": "fast",
+      "greeting": "Gmar chatimah tovah. Yom Kippur begins this evening. Das Lakshan continues. If you fast, Dew will not offer dinner."
+    },
+    {
+      "date": "2026-09-21",
+      "label": "Das Lakshan Parva (day 6) + Yom Kippur",
+      "faith": "Jain, Jewish",
+      "mode": "fast",
+      "greeting": "Gmar chatimah tovah. Yom Kippur. Observers: no food. Everyone else, eat as usual."
+    },
+    {
+      "date": "2026-09-22",
+      "label": "Das Lakshan Parva (day 7) + Parivartini Ekadashi",
+      "faith": "Jain, Hindu",
+      "mode": "fast",
+      "greeting": "Parivartini Ekadashi and Das Lakshan. If you observe either, skip meals. Dew will not push the thali."
+    },
+    {
+      "date": "2026-09-23",
+      "label": "Das Lakshan Parva (day 8)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Das Lakshan Parva. Digambar Jain observance — skip meals if that is your practice."
+    },
+    {
+      "date": "2026-09-24",
+      "label": "Das Lakshan Parva (day 9)",
+      "faith": "Jain",
+      "mode": "fast-and-festive",
+      "greeting": "Das Lakshan Parva. Digambar Jain observance — skip meals if that is your practice."
+    },
+    {
+      "date": "2026-09-25",
+      "label": "Das Lakshan Parva (day 10) + Anant Chaturdashi / Ganesh visarjan",
+      "faith": "Jain, Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Ganpati Bappa Morya, until next year. Das Lakshan closes. Fast if that is you; share prasad if that is you."
+    },
+    {
+      "date": "2026-09-26",
+      "label": "Sukkot (day 1)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-09-27",
+      "label": "Sukkot (day 2)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-09-28",
+      "label": "Sukkot (day 3)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-09-29",
+      "label": "Sukkot (day 4)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-09-30",
+      "label": "Sukkot (day 5)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-10-01",
+      "label": "Sukkot (day 6)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-10-02",
+      "label": "Sukkot (day 7)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Sukkot — eat, dwell in joy. Dew is waving a tiny metaphorical lulav."
+    },
+    {
+      "date": "2026-10-03",
+      "label": "Shemini Atzeret",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Shemini Atzeret. Dew wishes you a gentle close to the festival."
+    },
+    {
+      "date": "2026-10-04",
+      "label": "Simchat Torah",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Simchat Torah — dance with the scroll, then eat. Dew is cheering."
+    },
+    {
+      "date": "2026-10-07",
+      "label": "Indira Ekadashi",
+      "mode": "fast",
+      "faith": "Hindu",
+      "greeting": ""
+    },
+    {
+      "date": "2026-10-11",
+      "label": "Sharad Navratri (day 1)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-12",
+      "label": "Sharad Navratri (day 2)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-13",
+      "label": "Sharad Navratri (day 3)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-14",
+      "label": "Sharad Navratri (day 4)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-15",
+      "label": "Sharad Navratri (day 5)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-16",
+      "label": "Sharad Navratri (day 6)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-17",
+      "label": "Sharad Navratri (day 7)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-18",
+      "label": "Sharad Navratri (day 8)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-19",
+      "label": "Sharad Navratri (day 9)",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Shubh Navratri. Garba energy. If you are on vrat, Dew will not bully you toward the thali."
+    },
+    {
+      "date": "2026-10-20",
+      "label": "Dussehra / Sharad Navratri parana + Vijayadashami / Dussehra + Parkash Purab of Guru Granth Sahib",
+      "faith": "Hindu, Sikh",
+      "mode": "festive",
+      "greeting": "Shubh Dussehra. Also Parkash Purab of Sri Guru Granth Sahib Ji. Good wins. Eat, share, Dew is lighting a tiny diya."
+    },
+    {
+      "date": "2026-10-22",
+      "label": "Papankusha Ekadashi",
+      "faith": "Hindu",
+      "mode": "fast",
+      "greeting": "Papankusha Ekadashi. If you observe, skip grains."
+    },
+    {
+      "date": "2026-10-25",
+      "label": "Sharad Purnima",
+      "faith": "Hindu",
+      "mode": "festive",
+      "greeting": "Shubh Sharad Purnima. Kheer under moonlight energy. Dew approves dessert."
+    },
+    {
+      "date": "2026-10-29",
+      "label": "Karva Chauth",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Happy Karva Chauth. If you are fasting till the moon, Dew will not offer snacks. If not, eat."
+    },
+    {
+      "date": "2026-11-01",
+      "label": "All Saints Day",
+      "faith": "Christian",
+      "mode": "festive",
+      "greeting": "Peace on All Saints Day. Dew is quiet and kind today."
+    },
+    {
+      "date": "2026-11-05",
+      "label": "Rama Ekadashi",
+      "faith": "Hindu",
+      "mode": "fast",
+      "greeting": "Rama Ekadashi. If you observe, skip grains. Dew still believes in water."
+    },
+    {
+      "date": "2026-11-06",
+      "label": "Dhanteras",
+      "faith": "Hindu",
+      "mode": "festive",
+      "greeting": "Shubh Dhanteras. Lights, metal, mithai. Dew is festive — eat if that is your table."
+    },
+    {
+      "date": "2026-11-07",
+      "label": "Choti Diwali / Naraka Chaturdashi",
+      "faith": "Hindu",
+      "mode": "festive",
+      "greeting": "Shubh Choti Diwali. South India, this may be your main night. Eat, light up, Dew is glowing."
+    },
+    {
+      "date": "2026-11-08",
+      "label": "Diwali / Bandi Chhor Divas / Mahavir Nirvana",
+      "faith": "Hindu, Sikh, Jain",
+      "mode": "festive",
+      "greeting": "Shubh Deepavali. Bandi Chhor Divas. Mahavir Nirvana. Lights, langar, sweets. Dew is on festival duty — eat."
+    },
+    {
+      "date": "2026-11-09",
+      "label": "Govardhan Puja / Annakut",
+      "faith": "Hindu",
+      "mode": "festive",
+      "greeting": "Shubh Govardhan / Annakut. A mountain of food is the point. Dew will not stop you."
+    },
+    {
+      "date": "2026-11-10",
+      "label": "Bhai Dooj",
+      "faith": "Hindu",
+      "mode": "festive",
+      "greeting": "Happy Bhai Dooj. Tilak, sweets, siblings. Dew is sentimental and hydrated."
+    },
+    {
+      "date": "2026-11-20",
+      "label": "Devutthana Ekadashi / Prabodhini",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Prabodhini Ekadashi. Vishnu wakes, Chaturmas ends. Observe the vrat if that is you; Dew still says the greeting."
+    },
+    {
+      "date": "2026-11-24",
+      "label": "Guru Nanak Jayanti / Kartik Purnima",
+      "faith": "Sikh, Hindu",
+      "mode": "festive",
+      "greeting": "Guru Nanak Jayanti. Satnam. Langar is the theology of lunch. Eat, Dew is in line."
+    },
+    {
+      "date": "2026-11-29",
+      "label": "First Sunday of Advent",
+      "faith": "Christian",
+      "mode": "festive",
+      "greeting": "Blessed Advent. A quiet wait. Dew will still nag water, softer today."
+    },
+    {
+      "date": "2026-12-04",
+      "label": "Utpanna Ekadashi",
+      "faith": "Hindu",
+      "mode": "fast",
+      "greeting": "Utpanna Ekadashi. If you observe, skip grains."
+    },
+    {
+      "date": "2026-12-05",
+      "label": "Hanukkah (night 1)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-06",
+      "label": "Hanukkah (night 2)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-07",
+      "label": "Hanukkah (night 3)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-08",
+      "label": "Bodhi Day",
+      "faith": "Buddhist",
+      "mode": "festive",
+      "greeting": "Peace on Bodhi Day. Awake, gentle, still sip water. Dew bows."
+    },
+    {
+      "date": "2026-12-09",
+      "label": "Hanukkah (night 5)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-10",
+      "label": "Hanukkah (night 6)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-11",
+      "label": "Hanukkah (night 7)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-12",
+      "label": "Hanukkah (night 8)",
+      "faith": "Jewish",
+      "mode": "festive",
+      "greeting": "Chag Sameach. Hanukkah lights. Latkes optional. Dew is a tiny extra candle."
+    },
+    {
+      "date": "2026-12-20",
+      "label": "Mokshada Ekadashi / Gita Jayanti",
+      "faith": "Hindu",
+      "mode": "fast-and-festive",
+      "greeting": "Gita Jayanti and Mokshada Ekadashi. If you fast, Dew honors it. If not, eat — and maybe one verse."
+    },
+    {
+      "date": "2026-12-24",
+      "label": "Christmas Eve",
+      "faith": "Christian",
+      "mode": "festive",
+      "greeting": "Merry Christmas Eve. Dew is hanging a ridiculous tiny ornament on this popup."
+    },
+    {
+      "date": "2026-12-25",
+      "label": "Christmas",
+      "faith": "Christian",
+      "mode": "festive",
+      "greeting": "Merry Christmas. Peace, leftovers, and water somewhere in the joy."
+    },
+    {
+      "date": "2026-12-26",
+      "label": "Boxing Day",
+      "faith": "Christian",
+      "mode": "festive",
+      "greeting": "Boxing Day. Leftovers are sacred. Dew still wants a sip."
+    },
+    {
+      "date": "2026-12-31",
+      "label": "New Year Eve",
+      "faith": "Secular",
+      "mode": "festive",
+      "greeting": "See you in 2027. Dew will still be dramatic. Hydrate before midnight."
+    }
+  ]
+}

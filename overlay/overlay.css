@@ -1,0 +1,12 @@
+#hydro-squad-dew {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483646;
+  width: 280px;
+  font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+#hydro-squad-dew:empty {
+  display: none;
+}
