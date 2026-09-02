@@ -1,4 +1,4 @@
-importScripts("i18n.js", "meals.js");
+importScripts("i18n.js", "meals.js", "schedule.js");
 
 const DEFAULTS = {
   onboarded: false,
@@ -26,6 +26,8 @@ const DEFAULTS = {
   iObserveFasts: false
 };
 
+const NUDGE_STORE = chrome.storage.session || chrome.storage.local;
+
 function todayKey(date = new Date()) {
   return date.toISOString().slice(0, 10);
 }
@@ -40,6 +42,14 @@ function rankFor(sips, locale = "en") {
     if (sips >= title.min) rank = title;
   }
   return rank.name;
+}
+
+function iconUrl() {
+  return chrome.runtime.getURL("icons/icon128.png");
+}
+
+function nudgePageUrl() {
+  return chrome.runtime.getURL("overlay/nudge.html");
 }
 
 async function getState() {
@@ -89,11 +99,11 @@ async function loadOfficeFasts() {
   }
 }
 
-async function scheduleAlarm(intervalMin) {
+async function scheduleSipAlarm(state) {
   await chrome.alarms.clear("hydro-check");
-  chrome.alarms.create("hydro-check", {
-    periodInMinutes: Math.max(1, Number(intervalMin) || 45)
-  });
+  if (state.onboarded === false) return;
+  const delayInMinutes = sipAlarmDelayMin(state);
+  chrome.alarms.create("hydro-check", { delayInMinutes });
 }
 
 async function scheduleMeals(state) {
@@ -111,35 +121,59 @@ async function eatMeal(mealId) {
   const state = await getState();
   const key = localDayKey();
   const eaten = { ...resetEaten(state, key), [mealId]: true };
-  return setState({ eatenToday: eaten, lastMealDay: key });
+  const next = await setState({ eatenToday: eaten, lastMealDay: key });
+  await closeNudgeWindow();
+  return next;
 }
 
 async function honorFast() {
-  return setState({ fastingHonoredDay: localDayKey() });
+  const next = await setState({ fastingHonoredDay: localDayKey() });
+  await closeNudgeWindow();
+  return next;
+}
+
+async function snooze(minutes = 10) {
+  const state = await setState({
+    snoozeUntil: Date.now() + minutes * 60 * 1000
+  });
+  await refreshBadge(state);
+  await chrome.alarms.clear("dew-followup");
+  await scheduleSipAlarm(state);
+  await closeNudgeWindow();
+  return state;
+}
+
+async function createNotice(id, options) {
+  try {
+    await chrome.notifications.create(id, options);
+  } catch {
+    const fallback = { ...options };
+    delete fallback.buttons;
+    delete fallback.silent;
+    try {
+      await chrome.notifications.create(id, fallback);
+    } catch (err) {
+      console.warn("Dew notify failed", err);
+    }
+  }
 }
 
 async function notifyMeal(state, meal) {
+  const pack = i18nPack(state.locale);
   const day = occasionInfo(state);
   const title = `Dew · ${day.reason || mealLabel(meal.id, state.locale)}`;
-  await chrome.notifications.create(`meal-${meal.id}`, {
+  await createNotice(`meal-${meal.id}`, {
     type: "basic",
-    iconUrl: "icons/icon128.png",
+    iconUrl: iconUrl(),
     title,
     message: mealMessage(meal, day, state.locale).slice(0, 240),
-    priority: 2
+    priority: 2,
+    requireInteraction: true,
+    silent: false,
+    buttons: day.fasting
+      ? [{ title: pack.ui.honor }, { title: pack.ui.ate }]
+      : [{ title: pack.ui.ate }, { title: pack.ui.snooze }]
   });
-}
-
-function overdueRatio(state, now = Date.now()) {
-  const span = Math.max(1, state.intervalMin) * 60 * 1000;
-  if (!state.lastSip) return 2;
-  return (now - state.lastSip) / span;
-}
-
-function thirsty(state, now = Date.now()) {
-  if (state.snoozeUntil && now < state.snoozeUntil) return false;
-  if (!state.lastSip) return true;
-  return now - state.lastSip >= state.intervalMin * 60 * 1000;
 }
 
 async function refreshBadge(state) {
@@ -156,13 +190,82 @@ async function refreshBadge(state) {
 async function notify(state) {
   const pack = i18nPack(state.locale);
   const pool = pack.notify[state.personality] || pack.notify.roast;
-  await chrome.notifications.create("hydro-sip", {
+  await createNotice("hydro-sip", {
     type: "basic",
-    iconUrl: "icons/icon128.png",
+    iconUrl: iconUrl(),
     title: pack.notifySip,
     message: pick(pool),
-    priority: 1
+    priority: 2,
+    requireInteraction: true,
+    silent: false,
+    buttons: [{ title: pack.ui.sip }, { title: pack.ui.snooze }]
   });
+}
+
+async function pingOverlays() {
+  await chrome.storage.local.set({ duePing: Date.now() });
+  let tabs = [];
+  try {
+    tabs = await chrome.tabs.query({});
+  } catch {
+    return;
+  }
+  await Promise.all(
+    tabs.map((tab) =>
+      tab.id
+        ? chrome.tabs.sendMessage(tab.id, { type: "hydro-nudge" }).catch(() => {})
+        : Promise.resolve()
+    )
+  );
+}
+
+async function openNudgeWindow() {
+  try {
+    const { nudgeWindowId } = await NUDGE_STORE.get("nudgeWindowId");
+    if (nudgeWindowId) {
+      try {
+        try {
+          await chrome.windows.update(nudgeWindowId, { focused: true, drawAttention: true });
+        } catch {
+          await chrome.windows.update(nudgeWindowId, { focused: true });
+        }
+        const tabs = await chrome.tabs.query({ windowId: nudgeWindowId });
+        if (tabs[0]?.id) await chrome.tabs.reload(tabs[0].id);
+        return;
+      } catch {
+        await NUDGE_STORE.remove("nudgeWindowId");
+      }
+    }
+    const win = await chrome.windows.create({
+      url: nudgePageUrl(),
+      type: "popup",
+      focused: true,
+      width: 380,
+      height: 540
+    });
+    if (win?.id) await NUDGE_STORE.set({ nudgeWindowId: win.id });
+  } catch (err) {
+    console.warn("Dew nudge window failed", err);
+  }
+}
+
+async function closeNudgeWindow() {
+  try {
+    const { nudgeWindowId } = await NUDGE_STORE.get("nudgeWindowId");
+    if (nudgeWindowId) {
+      await chrome.windows.remove(nudgeWindowId).catch(() => {});
+      await NUDGE_STORE.remove("nudgeWindowId");
+    }
+  } catch {
+    /* ignore */
+  }
+}
+
+async function nagFor(state, { sip = false, meal = null } = {}) {
+  if (sip) await notify(state);
+  if (meal) await notifyMeal(state, meal);
+  await pingOverlays();
+  await openNudgeWindow();
 }
 
 async function sip() {
@@ -188,54 +291,96 @@ async function sip() {
     snoozeUntil: 0
   });
   await refreshBadge(next);
+  await chrome.alarms.clear("dew-followup");
+  await scheduleSipAlarm(next);
+  await chrome.notifications.clear("hydro-sip");
+  await closeNudgeWindow();
   return next;
 }
 
-chrome.runtime.onInstalled.addListener(async () => {
+async function boot() {
   const merged = await applyOfficeFasts();
-  await scheduleAlarm(merged.intervalMin);
   await scheduleMeals(merged);
   await refreshBadge(merged);
+  if (merged.onboarded && thirsty(merged) && merged.lastSip) {
+    await nagFor(merged, { sip: true, meal: mealDue(merged) });
+    chrome.alarms.create("dew-followup", { delayInMinutes: nagRepeatMin(merged) });
+    return;
+  }
+  await scheduleSipAlarm(merged);
+}
+
+chrome.runtime.onInstalled.addListener(() => {
+  void boot();
 });
 
-chrome.runtime.onStartup.addListener(async () => {
-  const merged = await applyOfficeFasts();
-  await scheduleAlarm(merged.intervalMin);
-  await scheduleMeals(merged);
-  await refreshBadge(merged);
+chrome.runtime.onStartup.addListener(() => {
+  void boot();
 });
 
-chrome.alarms.onAlarm.addListener(async (alarm) => {
+chrome.windows.onRemoved.addListener((id) => {
+  void NUDGE_STORE.get("nudgeWindowId").then(({ nudgeWindowId }) => {
+    if (nudgeWindowId === id) return NUDGE_STORE.remove("nudgeWindowId");
+  });
+});
+
+chrome.alarms.onAlarm.addListener((alarm) => {
+  return handleAlarm(alarm);
+});
+
+async function handleAlarm(alarm) {
   const state = await getState();
-  if (alarm.name === "hydro-check") {
+  if (alarm.name === "hydro-check" || alarm.name === "dew-followup") {
     await refreshBadge(state);
-    if (state.onboarded && thirsty(state)) await notify(state);
+    const dueMeal = state.onboarded && state.mealsEnabled !== false ? mealDue(state) : null;
+    const sipDue = state.onboarded && thirsty(state);
+    if (sipDue || dueMeal) {
+      await nagFor(state, { sip: sipDue, meal: dueMeal });
+      chrome.alarms.create("dew-followup", { delayInMinutes: nagRepeatMin(state) });
+      if (sipDue) return;
+    }
+    if (alarm.name === "hydro-check") await scheduleSipAlarm(state);
     return;
   }
   if (alarm.name.startsWith("meal-") && state.onboarded && state.mealsEnabled !== false) {
     const mealId = alarm.name.slice(5);
     const meal = mealsList(state).find((item) => item.id === mealId);
     if (meal && state.fastingHonoredDay !== localDayKey() && !resetEaten(state)[meal.id]) {
-      await notifyMeal(state, meal);
+      await nagFor(state, { sip: thirsty(state), meal });
+      chrome.alarms.create("dew-followup", { delayInMinutes: nagRepeatMin(state) });
     }
     if (meal) chrome.alarms.create(alarm.name, { when: nextOccurrence(meal) });
   }
+}
+
+chrome.notifications.onClicked.addListener((id) => {
+  void handleNotificationClick(id, null);
 });
 
-chrome.notifications.onClicked.addListener(async (id) => {
+chrome.notifications.onButtonClicked.addListener((id, index) => {
+  void handleNotificationClick(id, index);
+});
+
+async function handleNotificationClick(id, buttonIndex) {
   if (id === "hydro-sip") {
-    await sip();
+    if (buttonIndex === 1) await snooze(10);
+    else await sip();
     await chrome.notifications.clear(id);
     return;
   }
   if (id.startsWith("meal-")) {
     const state = await getState();
     const fast = fastingInfo(state);
-    if (fast.fasting && state.iObserveFasts) await honorFast();
-    else await eatMeal(id.slice(5));
+    if (buttonIndex === 1 && !fast.fasting) {
+      await snooze(10);
+    } else if (fast.fasting && state.iObserveFasts && buttonIndex !== 1) {
+      await honorFast();
+    } else {
+      await eatMeal(id.slice(5));
+    }
     await chrome.notifications.clear(id);
   }
-});
+}
 
 function publicState(state, extra = {}) {
   const day = occasionInfo(state);
@@ -274,12 +419,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       return;
     }
     if (message.type === "snooze") {
-      const minutes = Number(message.minutes) || 10;
-      const state = await setState({
-        snoozeUntil: Date.now() + minutes * 60 * 1000
-      });
-      await refreshBadge(state);
-      sendResponse(publicState(state));
+      sendResponse(publicState(await snooze(Number(message.minutes) || 10)));
       return;
     }
     if (message.type === "eat-meal") {
@@ -288,6 +428,11 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
     }
     if (message.type === "honor-fast") {
       sendResponse(publicState(await honorFast()));
+      return;
+    }
+    if (message.type === "nudge-closed") {
+      await NUDGE_STORE.remove("nudgeWindowId");
+      sendResponse({ ok: true });
       return;
     }
     if (message.type === "save-settings") {
@@ -319,7 +464,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
         patch.fastingHonoredDay = "";
       }
       const state = await setState(patch);
-      if (patch.intervalMin) await scheduleAlarm(patch.intervalMin);
+      await scheduleSipAlarm(state);
       await scheduleMeals(state);
       await refreshBadge(state);
       sendResponse(publicState(state));

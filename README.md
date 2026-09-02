@@ -2,9 +2,9 @@
 
 Dew — also **बूँद / थेंब** — is a monsoon roommate in your Chrome or Edge toolbar. Paani reminders, office thali bells, and upvaas cautions, in **English, हिंदी, and मराठी**.
 
-No account. No server. Silent (popup, badge, notifications, overlay). Data stays on the machine.
+No account. No server. Data stays on the machine. Dew nags with a reminder window, badge, OS notifications, and an on-page overlay.
 
-Current version: **1.4.0** · [github.com/Ramesh0708/hydro-squad](https://github.com/Ramesh0708/hydro-squad)
+Current version: **1.4.1** · [github.com/Ramesh0708/hydro-squad](https://github.com/Ramesh0708/hydro-squad)
 
 ## The vibe
 
@@ -20,6 +20,7 @@ Vibes: **Naram** (soft), **Teekha** (roast), **Filmy** (chaos).
 - Intro in about 10 seconds (name, chai/standup/deep-work/sanyasi rhythm, vibe)
 - **I sipped / पी लिया / प्यायलो** logs a sip, fills the meter, keeps a streak
 - **10 min, yaar** snoozes the nag
+- When sip or meal time is due, Dew pops a reminder window (with **I sipped**), a sticky OS notification, and can appear on http(s) pages — you should not have to open the toolbar icon
 - Overdue paani or a meal: Dew can appear on http(s) pages until you sip, eat, honor a fast, or snooze
 - Faces change (wink, smug, sleepy, judging, filmy, tapori). Poke Dew
 - Office meals in **local time**: nashta **8:15**, lunch **12:30**, chai **17:00**, dinner **20:30**, midnight **00:00**

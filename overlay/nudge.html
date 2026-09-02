@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dew</title>
+    <link rel="stylesheet" href="../popup/popup.css" />
+    <link rel="stylesheet" href="../dew/dew.css" />
+    <style>
+      html,
+      body {
+        width: 360px;
+        min-height: 0;
+        height: auto;
+      }
+      #app {
+        padding-bottom: 16px;
+      }
+      .primary,
+      .secondary {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <main id="app">
+      <p class="eyebrow" id="rank">Dew</p>
+      <div class="stage">
+        <div id="dew" class="dew" data-mood="thirsty" title="Dew"></div>
+        <p id="mood-tag" class="mood-tag"></p>
+        <p id="status" class="bubble"></p>
+      </div>
+      <div id="meal-box" class="meal-card hidden">
+        <p class="eyebrow" id="meal-label"></p>
+        <p id="meal-when"></p>
+      </div>
+      <button id="sip" class="primary splash" type="button">I sipped</button>
+      <button id="ate" class="secondary hidden" type="button">Kha liya</button>
+      <button id="honor" class="secondary hidden" type="button">I’m fasting — skip food</button>
+      <button id="snooze" class="secondary" type="button">10 min, yaar</button>
+    </main>
+    <script src="../i18n.js"></script>
+    <script src="../meals.js"></script>
+    <script src="../dew/dew.js"></script>
+    <script src="nudge.js"></script>
+  </body>
+</html>

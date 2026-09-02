@@ -1,5 +1,18 @@
 const CARD_CSS = `
-  :host { all: initial; }
+  :host {
+    all: initial;
+    position: fixed !important;
+    inset: auto 18px 18px auto !important;
+    margin: 0 !important;
+    border: 0 !important;
+    padding: 0 !important;
+    width: 280px !important;
+    display: block !important;
+    overflow: visible !important;
+    background: transparent !important;
+    z-index: 2147483647 !important;
+    pointer-events: auto !important;
+  }
   .wrap {
     font-family: "Segoe UI", "Nirmala UI", "Noto Sans Devanagari", sans-serif;
     color: #fff4e4;
@@ -42,9 +55,29 @@ const THIRST_CYCLE = {
 
 let cycleTimer = 0;
 
+function pinHost(host) {
+  host.style.setProperty("position", "fixed", "important");
+  host.style.setProperty("inset", "auto 18px 18px auto", "important");
+  host.style.setProperty("margin", "0", "important");
+  host.style.setProperty("border", "0", "important");
+  host.style.setProperty("padding", "0", "important");
+  host.style.setProperty("width", "280px", "important");
+  host.style.setProperty("display", "block", "important");
+  host.style.setProperty("z-index", "2147483647", "important");
+  host.style.setProperty("background", "transparent", "important");
+  host.style.setProperty("overflow", "visible", "important");
+}
+
 function removeDew() {
   clearInterval(cycleTimer);
-  document.getElementById("hydro-squad-dew")?.remove();
+  const host = document.getElementById("hydro-squad-dew");
+  if (!host) return;
+  try {
+    if (typeof host.hidePopover === "function") host.hidePopover();
+  } catch {
+    /* ignore */
+  }
+  host.remove();
 }
 
 function bucketFor(data) {
@@ -56,7 +89,14 @@ function bucketFor(data) {
 function showDew(data) {
   const bucket = bucketFor(data);
   const existing = document.getElementById("hydro-squad-dew");
-  if (existing?.dataset.bucket === bucket) return;
+  if (existing?.dataset.bucket === bucket) {
+    try {
+      if (typeof existing.showPopover === "function") existing.showPopover();
+    } catch {
+      /* already open */
+    }
+    return;
+  }
   removeDew();
 
   const meal = data.mealDue;
@@ -75,6 +115,8 @@ function showDew(data) {
   const host = document.createElement("div");
   host.id = "hydro-squad-dew";
   host.dataset.bucket = bucket;
+  host.setAttribute("popover", "manual");
+  pinHost(host);
   const shadow = host.attachShadow({ mode: "open" });
 
   const link = document.createElement("link");
@@ -130,12 +172,27 @@ function showDew(data) {
   }, 5000);
 
   shadow.append(link, style, wrap);
-  document.documentElement.appendChild(host);
+  const root = document.body || document.documentElement;
+  root.appendChild(host);
+  try {
+    if (typeof host.showPopover === "function") host.showPopover();
+  } catch {
+    /* older Chrome, or already open */
+  }
+}
+
+async function getData() {
+  try {
+    return await chrome.runtime.sendMessage({ type: "get-state" });
+  } catch {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+    return chrome.runtime.sendMessage({ type: "get-state" });
+  }
 }
 
 async function sync() {
   try {
-    const data = await chrome.runtime.sendMessage({ type: "get-state" });
+    const data = await getData();
     const show =
       data?.onboarded &&
       data.overlayEnabled !== false &&
@@ -148,5 +205,8 @@ async function sync() {
 }
 
 sync();
-setInterval(sync, 20000);
+setInterval(sync, 10000);
 chrome.storage.onChanged.addListener(sync);
+chrome.runtime.onMessage.addListener((message) => {
+  if (message?.type === "hydro-nudge") sync();
+});
