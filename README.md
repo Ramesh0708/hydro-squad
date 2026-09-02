@@ -1,24 +1,31 @@
 # Hydro Squad
 
-A Chromium extension for **Google Chrome** and **Microsoft Edge**. Dew is a dramatic water-droplet roommate in the toolbar: water reminders, office meal bells, and fasting/festival cautions.
+Dew — also **बूँद / थेंब** — is a monsoon roommate in your Chrome or Edge toolbar. Paani reminders, office thali bells, and upvaas cautions, in **English, हिंदी, and मराठी**.
 
-No account. No server. Data stays on the machine. Silent — Dew uses the popup, badge, notifications, and on-page overlay. No extension sounds.
+No account. No server. Silent (popup, badge, notifications, overlay). Data stays on the machine.
 
-Current version: **1.3.5** · [github.com/Ramesh0708/hydro-squad](https://github.com/Ramesh0708/hydro-squad)
+Current version: **1.4.0** · [github.com/Ramesh0708/hydro-squad](https://github.com/Ramesh0708/hydro-squad)
+
+## The vibe
+
+Dew is a peacock-teal droplet with a **mor pankh**, **tilak**, gold **nath**, and a tiny **mala**. Namaste on hello. Diya sparkle on utsav days. Filmy drama when you forget water.
+
+Ranks follow the monsoon: **Boond → Rimjhim → Barsaat → Baadal → Ganga → Jaldev**.
+
+Vibes: **Naram** (soft), **Teekha** (roast), **Filmy** (chaos).
 
 ## What Dew does
 
-- Introduces themselves in about 10 seconds (name, nudge interval, personality)
-- Personalities: **Soft**, **Roast**, **Chaos**
-- **I sipped** logs a sip, updates the daily meter, and keeps a streak (Puddle → Hydrolegend)
-- **Give me 10 minutes** snoozes the water nag
-- When water or a meal is overdue, Dew can appear on http(s) pages until you sip, eat, honor a fast, or snooze
-- Faces change (wink, smug, sleepy, judging, dramatic, feral). Poke Dew
-- Toolbar icons and desktop notifications stay still (first frame). Dew is CSS-animated in the popup and overlay
-- Office meals in **local time**: breakfast **8:15**, lunch **12:30**, snack **17:00**, dinner **20:30**, midnight **00:00**
-- Fasting/festival days from packed `office-fasts.json` (Hindu, Muslim, Jain, Sikh, Jewish, Christian, Buddhist dates among others). Observers get a caution; everyone else is still told to eat
-- Mark today as a fast, weekly fasts, extra dates, or “I personally observe”
-- Teams / Power Automate still owns the canteen menu. Dew only grabs people who never open Teams
+- Language picker on first open and in settings: English · हिंदी · मराठी
+- Intro in about 10 seconds (name, chai/standup/deep-work/sanyasi rhythm, vibe)
+- **I sipped / पी लिया / प्यायलो** logs a sip, fills the meter, keeps a streak
+- **10 min, yaar** snoozes the nag
+- Overdue paani or a meal: Dew can appear on http(s) pages until you sip, eat, honor a fast, or snooze
+- Faces change (wink, smug, sleepy, judging, filmy, tapori). Poke Dew
+- Office meals in **local time**: nashta **8:15**, lunch **12:30**, chai **17:00**, dinner **20:30**, midnight **00:00**
+- Fasting/festival days from `office-fasts.json`. Observers get a caution; everyone else is still told to eat
+- Mark today as upvaas, weekly fasts, extra dates, or “I personally observe”
+- Teams / Power Automate still owns the canteen menu
 
 Clicking a water notification counts as a sip. Meal notifications mark that meal eaten (or honor a fast if you observe).
 
@@ -42,13 +49,6 @@ Same folder for both browsers. After you pull updates, open the extensions page 
 
 Pin the icon. Click it. Let Dew move in.
 
-## How to show friends
-
-1. Send them this repo or a zip of the folder
-2. They load unpacked once
-3. They pick Roast or Chaos
-4. Dew handles the rest
-
 ## Privacy
 
-Everything stays in `chrome.storage.local` on that computer. Permissions are `storage`, `alarms`, and `notifications` only. No tracking, no analytics.
+Everything stays in `chrome.storage.local`. Permissions are `storage`, `alarms`, and `notifications` only. No tracking, no analytics.

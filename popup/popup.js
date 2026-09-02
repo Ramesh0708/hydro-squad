@@ -1,6 +1,7 @@
 const state = {
   intervalMin: 45,
   personality: "roast",
+  locale: "en",
   overlayEnabled: true,
   displayName: "",
   mood: "ok"
@@ -14,6 +15,10 @@ function $(id) {
   return document.getElementById(id);
 }
 
+function loc() {
+  return state.locale || "en";
+}
+
 function show(id) {
   document.querySelectorAll(".screen").forEach((el) => el.classList.add("hidden"));
   $(id).classList.remove("hidden");
@@ -21,6 +26,27 @@ function show(id) {
 
 function send(type, extra = {}) {
   return chrome.runtime.sendMessage({ type, ...extra });
+}
+
+function applyShell(locale = loc()) {
+  document.documentElement.lang = i18nPack(locale).htmlLang;
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    el.textContent = t(locale, el.dataset.i18n);
+  });
+  $("name").placeholder = t(locale, "namePh");
+  $("fast-label").placeholder = t(locale, "fastPh");
+  $("fast-date-label").placeholder = t(locale, "datePh");
+  $("dew").title = t(locale, "pokeTitle");
+  $("sip").textContent = t(locale, "sip");
+  $("snooze").textContent = t(locale, "snooze");
+  $("ate").textContent = t(locale, "ate");
+  $("honor").textContent = t(locale, "honor");
+  $("add-fast").textContent = t(locale, "add");
+  $("settings-title").textContent = t(locale, "settings");
+  $("streak-label").textContent = t(locale, "streak");
+  $("until-label").textContent = t(locale, "untilSip");
+  markPills("languages", "locale", locale);
+  markPills("set-languages", "locale", locale);
 }
 
 function markPills(rootId, attr, value) {
@@ -36,14 +62,15 @@ function bindPills(rootId, attr, onPick) {
 }
 
 function formatWait(data) {
+  const locale = data.locale || loc();
   if (data.snoozeUntil && Date.now() < data.snoozeUntil) {
     const m = Math.ceil((data.snoozeUntil - Date.now()) / 60000);
-    return `${m}m nap`;
+    return t(locale, "waitNap", { m });
   }
-  if (!data.lastSip) return "now";
+  if (!data.lastSip) return t(locale, "waitNow");
   const due = data.lastSip + data.intervalMin * 60 * 1000;
   const left = due - Date.now();
-  if (left <= 0) return "now";
+  if (left <= 0) return t(locale, "waitNow");
   const m = Math.ceil(left / 60000);
   return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`;
 }
@@ -52,7 +79,7 @@ function setMood(el, mood) {
   el.dataset.mood = mood;
   state.mood = mood;
   const tag = $("mood-tag");
-  if (tag) tag.textContent = mood;
+  if (tag) tag.textContent = i18nPack(loc()).moods[mood] || mood;
 }
 
 function hydrateDews() {
@@ -65,7 +92,7 @@ function idleCycle(data) {
   clearInterval(cycleTimer);
   const base = homeMood(data);
   const fidgets = {
-    ok: ["ok", "wink", "sideeye"],
+    ok: ["ok", "wink", "sideeye", "wave"],
     smug: ["smug", "wink", "happy"],
     love: ["love", "wink", "happy"],
     thirsty: ["thirsty", "judging", "sideeye"],
@@ -75,25 +102,31 @@ function idleCycle(data) {
     sleepy: ["sleepy", "ok"],
     fasting: ["fasting", "wink", "ok"],
     hungry: ["hungry", "judging", "dramatic"],
-    festive: ["festive", "love", "wink"]
+    festive: ["festive", "love", "wink", "wave"]
   };
   const pool = fidgets[base] || [base];
   cycleTimer = setInterval(() => {
     if (pokeLock) return;
     const next = pick(pool);
     setMood($("dew"), next);
-    $("status").textContent = lineFor(next, data.personality);
+    $("status").textContent = lineFor(next, data.personality, loc());
   }, 4200);
 }
 
 function render(data, justSipped = false) {
   Object.assign(state, data);
   hydrateDews();
-  $("hello").textContent = data.displayName ? `Hey, ${data.displayName}.` : "Hey, legend.";
-  $("rank").textContent = data.rank || "Puddle";
+  applyShell(loc());
+  $("hello").textContent = data.displayName
+    ? t(loc(), "hello", { name: data.displayName })
+    : t(loc(), "helloAnon");
+  $("rank").textContent = data.rank || i18nPack(loc()).ranks[0].name;
   $("streak").textContent = data.streak || 0;
   $("next").textContent = formatWait(data);
-  $("meter-copy").textContent = `${data.sipsToday || 0} / ${data.goal || 8} sips today`;
+  $("meter-copy").textContent = t(loc(), "sipsToday", {
+    n: data.sipsToday || 0,
+    goal: data.goal || 8
+  });
   $("fill").style.width = `${Math.min(100, ((data.sipsToday || 0) / (data.goal || 8)) * 100)}%`;
   $("overlay").checked = data.overlayEnabled !== false;
   $("meals-on").checked = data.mealsEnabled !== false;
@@ -105,31 +138,33 @@ function render(data, justSipped = false) {
   const special = !!(data.fasting || data.festive);
   banner.classList.toggle("hidden", !special);
   banner.classList.toggle("festive", !!data.festive && !data.fasting);
-  $("day-title").textContent = data.festive && data.fasting
-    ? "Festival + fasting"
-    : data.festive
-      ? "Festival"
-      : "Fasting day";
+  $("day-title").textContent =
+    data.festive && data.fasting
+      ? t(loc(), "festivalFast")
+      : data.festive
+        ? t(loc(), "festival")
+        : t(loc(), "fastingDay");
   $("fast-reason").textContent = data.greeting
     ? `${data.greeting}${data.faith ? ` · ${data.faith}` : ""}`
     : data.fasting
-      ? `${data.fastingReason}. If you’re observing, do not eat. If you’re not, eat as usual.`
+      ? t(loc(), "fastingFallback", { reason: data.fastingReason })
       : "";
 
   const due = data.mealDue;
   const upcoming = data.nextMeal;
+  const dueName = due ? mealLabel(due.id, loc()) : "";
   $("meal-label").textContent = due
     ? data.fasting
-      ? `${due.label} · fasting caution`
-      : `${due.label} · now`
-    : "Next plate";
+      ? t(loc(), "mealNowFast", { label: dueName })
+      : t(loc(), "mealNow", { label: dueName })
+    : t(loc(), "nextPlate");
   $("meal-when").textContent = due
     ? data.fasting
-      ? "Skip if you’re fasting"
-      : "Go eat"
+      ? t(loc(), "skipIfFasting")
+      : t(loc(), "goEat")
     : upcoming
-      ? `${upcoming.label} · ${upcoming.clock} · ${upcoming.wait}`
-      : "Office meals off";
+      ? `${mealLabel(upcoming.id, loc())} · ${upcoming.clock} · ${upcoming.wait}`
+      : t(loc(), "mealsOff");
   $("honor").classList.toggle("hidden", !data.fasting);
 
   drawMealTimes(data);
@@ -139,9 +174,11 @@ function render(data, justSipped = false) {
   const dew = $("dew");
   const mood = homeMood(data, justSipped);
   setMood(dew, mood);
-  $("status").textContent = data.greeting || (data.fasting && !due
-    ? lineFor("fasting", data.personality)
-    : lineFor(mood, data.personality));
+  $("status").textContent =
+    data.greeting ||
+    (data.fasting && !due
+      ? lineFor("fasting", data.personality, loc())
+      : lineFor(mood, data.personality, loc()));
   idleCycle(data);
 
   markPills("set-intervals", "interval", data.intervalMin);
@@ -161,15 +198,23 @@ function playIntro() {
 
 async function load() {
   hydrateDews();
-  const data = await send("get-state");
-  if (!data.onboarded) {
+  applyShell(state.locale);
+  try {
+    const data = await send("get-state");
+    state.locale = data.locale || "en";
+    applyShell(loc());
+    if (!data.onboarded) {
+      show("onboard");
+      playIntro();
+      return;
+    }
+    clearInterval(introTimer);
+    show("home");
+    render(data);
+  } catch {
     show("onboard");
     playIntro();
-    return;
   }
-  clearInterval(introTimer);
-  show("home");
-  render(data);
 }
 
 bindPills("intervals", "interval", (value) => {
@@ -180,6 +225,15 @@ bindPills("intervals", "interval", (value) => {
 bindPills("personalities", "personality", (value) => {
   state.personality = value;
   markPills("personalities", "personality", value);
+});
+
+bindPills("languages", "locale", (value) => {
+  state.locale = value;
+  applyShell(value);
+});
+
+bindPills("set-languages", "locale", async (value) => {
+  render(await send("save-settings", { locale: value }));
 });
 
 bindPills("set-intervals", "interval", async (value) => {
@@ -196,6 +250,7 @@ $("start").addEventListener("click", async () => {
     onboarded: true,
     intervalMin: state.intervalMin,
     personality: state.personality,
+    locale: loc(),
     displayName: $("name").value.trim()
   });
   show("home");
@@ -219,7 +274,7 @@ $("dew").addEventListener("click", () => {
   pokeLock = true;
   const mood = pick(POKES);
   setMood($("dew"), mood);
-  $("status").textContent = lineFor(mood, state.personality);
+  $("status").textContent = lineFor(mood, state.personality, loc());
   setTimeout(() => {
     pokeLock = false;
     setMood($("dew"), homeMood(state));
@@ -265,7 +320,7 @@ $("honor").addEventListener("click", async () => {
 
 $("add-fast").addEventListener("click", async () => {
   const date = $("fast-date").value;
-  const label = $("fast-date-label").value.trim() || "Fasting day";
+  const label = $("fast-date-label").value.trim() || t(loc(), "fastingDay");
   if (!date) return;
   const fastingDates = [...(state.fastingDates || []).filter((item) => item.date !== date), { date, label }];
   $("fast-date").value = "";
@@ -282,7 +337,7 @@ function drawMealTimes(data) {
   root.innerHTML = mealsList(data)
     .map(
       (meal) => `
-      <label>${meal.label}
+      <label>${mealLabel(meal.id, loc())}
         <input type="time" data-meal="${meal.id}" value="${timeValue(meal)}" />
       </label>`
     )
@@ -301,10 +356,11 @@ function drawMealTimes(data) {
 
 function drawWeekdays(data) {
   const selected = data.fastingWeekdays || [];
+  const names = i18nPack(loc()).weekdays;
   const root = $("weekdays");
   root.innerHTML = WEEKDAYS.map(
     (day) =>
-      `<button type="button" data-day="${day.id}" class="${selected.includes(day.id) ? "on" : ""}">${day.short}</button>`
+      `<button type="button" data-day="${day.id}" class="${selected.includes(day.id) ? "on" : ""}">${names[day.id]}</button>`
   ).join("");
   root.querySelectorAll("button").forEach((btn) => {
     btn.addEventListener("click", async () => {

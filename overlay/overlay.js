@@ -1,8 +1,8 @@
 const CARD_CSS = `
   :host { all: initial; }
   .wrap {
-    font-family: "Segoe UI", "Trebuchet MS", sans-serif;
-    color: #e8fff8;
+    font-family: "Segoe UI", "Nirmala UI", "Noto Sans Devanagari", sans-serif;
+    color: #fff4e4;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -11,22 +11,23 @@ const CARD_CSS = `
     max-width: 270px;
     padding: 12px;
     border-radius: 18px;
-    background: rgba(8, 40, 46, 0.94);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
-    border: 1px solid rgba(92, 225, 230, 0.25);
+    background: rgba(28, 10, 36, 0.96);
+    box-shadow: 0 16px 40px rgba(40, 8, 18, 0.4);
+    border: 1px solid rgba(240, 193, 75, 0.4);
   }
-  .card.fast { border-color: rgba(240, 194, 122, 0.45); }
-  .card.festive { border-color: rgba(255, 211, 106, 0.55); }
+  .card.fast { border-color: rgba(240, 194, 122, 0.55); }
+  .card.festive { border-color: rgba(238, 123, 42, 0.7); }
   .row { display: flex; gap: 10px; align-items: center; }
-  .dew { width: 54px; height: 70px; flex: none; }
-  .copy { margin: 0; font-size: 13px; line-height: 1.35; }
+  .dew { width: 58px; height: 76px; flex: none; }
+  .copy { margin: 0; font-size: 13px; line-height: 1.4; }
   .actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
   button {
-    border: 0; cursor: pointer; font: 12px/1 "Segoe UI", sans-serif;
+    border: 0; cursor: pointer;
+    font: 12px/1.3 "Segoe UI", "Nirmala UI", sans-serif;
     padding: 8px 10px; border-radius: 999px;
   }
-  .sip { background: #5ce1e6; color: #083238; font-weight: 700; }
-  .later { background: rgba(255, 255, 255, 0.1); color: #e8fff8; }
+  .sip { background: linear-gradient(180deg, #ffb347, #ee7b2a); color: #3a1408; font-weight: 700; }
+  .later { background: rgba(255, 255, 255, 0.1); color: #fff4e4; }
 `;
 
 const THIRST_CYCLE = {
@@ -66,9 +67,10 @@ function showDew(data) {
         ? "festive"
         : "hungry"
     : homeMood(data);
+  const locale = data.locale || "en";
   const copy = meal
-    ? mealMessage(meal, data)
-    : data.greeting || lineFor(mood, data.personality);
+    ? mealMessage(meal, data, locale)
+    : data.greeting || lineFor(mood, data.personality, locale);
 
   const host = document.createElement("div");
   host.id = "hydro-squad-dew";
@@ -86,12 +88,12 @@ function showDew(data) {
   wrap.className = "wrap";
   const extra = meal
     ? data.fasting
-      ? `<button class="sip" data-act="honor" type="button">I’m fasting</button>
-         <button class="later" data-act="eat" type="button">I still eat</button>`
-      : `<button class="sip" data-act="eat" type="button">I ate</button>
-         <button class="later" data-act="later" type="button">10 min</button>`
-    : `<button class="sip" data-act="sip" type="button">I sipped</button>
-       <button class="later" data-act="later" type="button">10 min</button>`;
+      ? `<button class="sip" data-act="honor" type="button">${t(locale, "honor")}</button>
+         <button class="later" data-act="eat" type="button">${t(locale, "ate")}</button>`
+      : `<button class="sip" data-act="eat" type="button">${t(locale, "ate")}</button>
+         <button class="later" data-act="later" type="button">${t(locale, "snooze")}</button>`
+    : `<button class="sip" data-act="sip" type="button">${t(locale, "sip")}</button>
+       <button class="later" data-act="later" type="button">${t(locale, "snooze")}</button>`;
 
   wrap.innerHTML = `
     <div class="card ${data.fasting ? "fast" : ""} ${data.festive ? "festive" : ""}">
@@ -118,7 +120,7 @@ function showDew(data) {
     const dew = wrap.querySelector(".dew");
     const poke = pick(POKES);
     dew.dataset.mood = poke;
-    wrap.querySelector(".copy").textContent = lineFor(poke, data.personality);
+    wrap.querySelector(".copy").textContent = lineFor(poke, data.personality, locale);
   });
 
   const pool = THIRST_CYCLE[mood] || [mood];

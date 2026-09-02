@@ -1,9 +1,10 @@
-importScripts("meals.js");
+importScripts("i18n.js", "meals.js");
 
 const DEFAULTS = {
   onboarded: false,
   intervalMin: 45,
   personality: "roast",
+  locale: "en",
   overlayEnabled: true,
   lastSip: 0,
   snoozeUntil: 0,
@@ -25,39 +26,6 @@ const DEFAULTS = {
   iObserveFasts: false
 };
 
-const LINES = {
-  roast: [
-    "A cactus just texted. It feels seen.",
-    "Your blood called. It wants a raise and a glass of water.",
-    "This is not a reminder. This is an intervention.",
-    "You have time to open 14 tabs. You have time to sip.",
-    "Dew is writing a tell-all. Chapter 1: The Drought Years."
-  ],
-  gentle: [
-    "Hey. Tiny sip. Future-you will high-five you.",
-    "Water break. Your brain is doing a lot.",
-    "Dew brought you a pause. Drink a little.",
-    "Soft reminder: you are allowed to take care of yourself.",
-    "One glass. Then back to being brilliant."
-  ],
-  chaos: [
-    "CODE RED. THE OCEAN IS FILING A MISSING-PERSON REPORT.",
-    "HYDRATION POLICE. HANDS WHERE DEW CAN SEE THEM.",
-    "This tab is now a fountain. Mentally. Sip.",
-    "Breaking news: local human forgets they are 60% water.",
-    "Dew has entered the chat. Dew will not leave until you sip."
-  ]
-};
-
-const TITLES = [
-  { min: 0, name: "Puddle" },
-  { min: 3, name: "Stream" },
-  { min: 8, name: "River" },
-  { min: 16, name: "Lake" },
-  { min: 30, name: "Ocean" },
-  { min: 50, name: "Hydrolegend" }
-];
-
 function todayKey(date = new Date()) {
   return date.toISOString().slice(0, 10);
 }
@@ -66,9 +34,9 @@ function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function rankFor(sips) {
-  let rank = TITLES[0];
-  for (const title of TITLES) {
+function rankFor(sips, locale = "en") {
+  let rank = i18nPack(locale).ranks[0];
+  for (const title of i18nPack(locale).ranks) {
     if (sips >= title.min) rank = title;
   }
   return rank.name;
@@ -152,16 +120,12 @@ async function honorFast() {
 
 async function notifyMeal(state, meal) {
   const day = occasionInfo(state);
-  const title = day.festive
-    ? `Dew · ${day.reason}`
-    : day.fasting
-      ? `Dew · ${day.reason}`
-      : `Dew · ${meal.label}`;
+  const title = `Dew · ${day.reason || mealLabel(meal.id, state.locale)}`;
   await chrome.notifications.create(`meal-${meal.id}`, {
     type: "basic",
     iconUrl: "icons/icon128.png",
     title,
-    message: mealMessage(meal, day).slice(0, 240),
+    message: mealMessage(meal, day, state.locale).slice(0, 240),
     priority: 2
   });
 }
@@ -181,20 +145,21 @@ function thirsty(state, now = Date.now()) {
 async function refreshBadge(state) {
   if (!thirsty(state)) {
     await chrome.action.setBadgeText({ text: "" });
-    await chrome.action.setTitle({ title: "Hydro Squad — Dew is thriving" });
+    await chrome.action.setTitle({ title: i18nPack(state.locale).badgeOk });
     return;
   }
-  await chrome.action.setBadgeBackgroundColor({ color: "#1aa7b8" });
-  await chrome.action.setBadgeText({ text: "sip" });
-  await chrome.action.setTitle({ title: "Dew is dramatic. Sip water." });
+  await chrome.action.setBadgeBackgroundColor({ color: "#ee7b2a" });
+  await chrome.action.setBadgeText({ text: i18nPack(state.locale).badgeSip });
+  await chrome.action.setTitle({ title: i18nPack(state.locale).badgeThirsty });
 }
 
 async function notify(state) {
-  const pool = LINES[state.personality] || LINES.roast;
+  const pack = i18nPack(state.locale);
+  const pool = pack.notify[state.personality] || pack.notify.roast;
   await chrome.notifications.create("hydro-sip", {
     type: "basic",
     iconUrl: "icons/icon128.png",
-    title: "Dew needs you",
+    title: pack.notifySip,
     message: pick(pool),
     priority: 1
   });
@@ -280,7 +245,7 @@ function publicState(state, extra = {}) {
     ...state,
     thirsty: thirsty(state),
     overdueRatio: overdueRatio(state),
-    rank: rankFor(state.sipsToday),
+    rank: rankFor(state.sipsToday, state.locale),
     fasting: day.fasting,
     festive: day.festive,
     fastingReason: day.reason,
@@ -290,8 +255,8 @@ function publicState(state, extra = {}) {
     nextMeal: upcoming
       ? {
           ...upcoming,
-          clock: formatClock(upcoming.hour, upcoming.minute),
-          wait: formatMealWait(upcoming.inMs)
+          clock: formatClock(upcoming.hour, upcoming.minute, state.locale),
+          wait: formatMealWait(upcoming.inMs, state.locale)
         }
       : null,
     ...extra
@@ -329,6 +294,7 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       const patch = {};
       if (message.intervalMin) patch.intervalMin = Number(message.intervalMin);
       if (message.personality) patch.personality = message.personality;
+      if (message.locale && I18N[message.locale]) patch.locale = message.locale;
       if (typeof message.overlayEnabled === "boolean") {
         patch.overlayEnabled = message.overlayEnabled;
       }
@@ -342,8 +308,10 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       if (Array.isArray(message.fastingDates)) patch.fastingDates = message.fastingDates;
       if (Array.isArray(message.meals)) patch.meals = message.meals;
       if (message.fastingToday === true) {
+        const current = await getState();
+        const locale = patch.locale || current.locale || "en";
         patch.fastingTodayKey = localDayKey();
-        patch.fastingTodayLabel = (message.fastingTodayLabel || "Office fasting day").slice(0, 40);
+        patch.fastingTodayLabel = (message.fastingTodayLabel || t(locale, "defaultFast")).slice(0, 40);
       }
       if (message.fastingToday === false) {
         patch.fastingTodayKey = "";

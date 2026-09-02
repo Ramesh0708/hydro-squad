@@ -16,28 +16,6 @@ const WEEKDAYS = [
   { id: 6, short: "Sat" }
 ];
 
-const MEAL_LINES = {
-  eat: {
-    breakfast: "Breakfast. 8:15. Teams has the menu. Your stomach has a vacancy.",
-    lunch: "Lunch. 12:30. Close the tab. Open a plate.",
-    snack: "Snack. 5:00. This is the 5pm plot twist.",
-    dinner: "Dinner. 8:30. The office day is over. You still have to eat it.",
-    midnight: "Midnight snack. Dew will not judge. Dew will notice if you skip."
-  },
-  fast: {
-    breakfast:
-      "Breakfast bell — and today is a fasting day. If you’re observing, do not eat. If you’re not, the canteen is still real.",
-    lunch:
-      "Lunch bell — fasting day. Observers: skip. Everyone else: eat. Dew can hold two thoughts.",
-    snack:
-      "Snack time, but it’s a fasting day. If that’s you, Dew is the opposite of a peer-pressure snack.",
-    dinner:
-      "Dinner bell on a fasting day. Honor it if you’re fasting. Eat if you’re not.",
-    midnight:
-      "Midnight snack, fasting day. Observers stay closed. Non-fasters, Dew is not your priest."
-  }
-};
-
 function localDayKey(date = new Date()) {
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");
@@ -72,12 +50,13 @@ function isFestiveMode(mode) {
 }
 
 function occasionInfo(state, date = new Date()) {
+  const locale = state.locale || "en";
   const key = localDayKey(date);
   if (state.fastingTodayKey === key) {
     return {
       fasting: true,
       festive: false,
-      reason: state.fastingTodayLabel || "Office fasting day",
+      reason: state.fastingTodayLabel || t(locale, "defaultFast"),
       greeting: "",
       faith: ""
     };
@@ -88,7 +67,7 @@ function occasionInfo(state, date = new Date()) {
     return {
       fasting: isFastMode(mode),
       festive: isFestiveMode(mode),
-      reason: named.label || "Observance",
+      reason: named.label || t(locale, "fastingDay"),
       greeting: named.greeting || "",
       faith: named.faith || ""
     };
@@ -97,7 +76,7 @@ function occasionInfo(state, date = new Date()) {
     return {
       fasting: true,
       festive: false,
-      reason: "Weekly fast",
+      reason: t(locale, "weekly"),
       greeting: "",
       faith: ""
     };
@@ -133,29 +112,31 @@ function mealDue(state, now = new Date()) {
     if (eaten[meal.id]) continue;
     const start = atTime(meal.hour, meal.minute, now).getTime();
     const end = start + 25 * 60 * 1000;
-    const t = now.getTime();
-    if (t >= start && t <= end) return { ...meal, at: start };
+    const stamp = now.getTime();
+    if (stamp >= start && stamp <= end) return { ...meal, at: start };
   }
   return null;
 }
 
-function mealMessage(meal, fastingOrInfo) {
+function mealMessage(meal, fastingOrInfo, locale = "en") {
+  const pack = i18nPack(locale);
   const info =
     typeof fastingOrInfo === "object" && fastingOrInfo
       ? fastingOrInfo
       : { fasting: !!fastingOrInfo, festive: false, greeting: "" };
-  const base = (info.fasting ? MEAL_LINES.fast : MEAL_LINES.eat)[meal.id] || `${meal.label} is now.`;
+  const lines = info.fasting ? pack.mealFast : pack.mealEat;
+  const base = lines[meal.id] || `${mealLabel(meal.id, locale)}`;
   if (info.greeting) return `${info.greeting} ${base}`;
   return base;
 }
 
-function formatClock(hour, minute) {
+function formatClock(hour, minute, locale = "en") {
   const d = atTime(hour, minute);
-  return d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  return d.toLocaleTimeString(localeTag(locale), { hour: "numeric", minute: "2-digit" });
 }
 
-function formatMealWait(ms) {
-  if (ms <= 0) return "now";
+function formatMealWait(ms, locale = "en") {
+  if (ms <= 0) return t(locale, "waitNow");
   const m = Math.ceil(ms / 60000);
   if (m < 60) return `${m}m`;
   const h = Math.floor(m / 60);

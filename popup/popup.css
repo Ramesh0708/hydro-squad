@@ -1,12 +1,13 @@
 :root {
-  --bg: #06242c;
-  --bg-2: #0b3a38;
-  --ink: #e8fff8;
-  --muted: #9ad4c8;
-  --aqua: #5ce1e6;
-  --deep: #148c9b;
-  --coral: #ff8a78;
-  --shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  --bg: #1a0c24;
+  --bg-2: #2c1238;
+  --ink: #fff4e4;
+  --muted: #e8c9a8;
+  --aqua: #2ec4b6;
+  --gold: #f0c14b;
+  --saffron: #ee7b2a;
+  --deep: #0b6b6a;
+  --shadow: 0 18px 40px rgba(40, 8, 18, 0.35);
 }
 
 * {
@@ -18,13 +19,32 @@ body {
   margin: 0;
   width: 360px;
   min-height: 560px;
-  background: radial-gradient(circle at 20% 0%, #125e5a, var(--bg) 55%);
+  background:
+    radial-gradient(circle at 85% -8%, rgba(238, 123, 42, 0.55), transparent 42%),
+    radial-gradient(circle at 8% 100%, rgba(46, 196, 182, 0.38), transparent 48%),
+    radial-gradient(circle at 50% 40%, rgba(240, 193, 75, 0.08), transparent 55%),
+    var(--bg);
   color: var(--ink);
-  font: 15px/1.4 "Segoe UI", "Trebuchet MS", sans-serif;
+  font: 15px/1.45 "Segoe UI", "Nirmala UI", "Noto Sans Devanagari", "Trebuchet MS", sans-serif;
+}
+
+body::before {
+  content: "";
+  pointer-events: none;
+  position: fixed;
+  inset: 0 0 auto;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    #ee7b2a 0 16px,
+    #f0c14b 16px 32px,
+    #2ec4b6 32px 48px,
+    #c0392b 48px 64px
+  );
 }
 
 #app {
-  padding: 18px 18px 20px;
+  padding: 22px 18px 20px;
 }
 
 .screen.hidden {
@@ -41,7 +61,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 11px;
-  color: var(--aqua);
+  color: var(--gold);
 }
 
 h1 {
@@ -84,7 +104,7 @@ input[type="text"],
 }
 
 #name:focus {
-  outline-color: var(--aqua);
+  outline-color: var(--gold);
 }
 
 .pills {
@@ -111,8 +131,8 @@ input[type="text"],
 }
 
 .pills button.on {
-  background: var(--aqua);
-  color: #083238;
+  background: linear-gradient(180deg, #f7d56a, var(--gold));
+  color: #3a1408;
   font-weight: 700;
 }
 
@@ -125,8 +145,8 @@ input[type="text"],
 }
 
 .primary {
-  background: linear-gradient(180deg, #7af0ea, var(--aqua));
-  color: #073038;
+  background: linear-gradient(180deg, #ffb347, var(--saffron));
+  color: #3a1408;
   font-weight: 800;
   box-shadow: var(--shadow);
 }
@@ -156,7 +176,7 @@ input[type="text"],
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--aqua);
+  color: var(--gold);
 }
 
 .bubble {
@@ -182,7 +202,7 @@ input[type="text"],
 .meter-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--aqua), #9dffc4);
+  background: linear-gradient(90deg, var(--saffron), var(--gold), var(--aqua));
   transition: width 0.35s ease;
 }
 
@@ -225,7 +245,17 @@ input[type="text"],
 }
 
 .hint code {
-  color: var(--aqua);
+  color: var(--gold);
+}
+
+.fast-banner {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(192, 57, 43, 0.18);
+  border: 1px solid rgba(240, 193, 75, 0.35);
+  color: #ffe9b0;
+  font-size: 13px;
 }
 
 .fast-banner.festive {

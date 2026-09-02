@@ -10,46 +10,50 @@
   <body>
     <main id="app">
       <section id="onboard" class="screen hidden">
-        <p class="eyebrow">meet your roommate</p>
+        <p class="eyebrow" data-i18n="onboardEyebrow">your monsoon roommate</p>
         <div class="dew big" data-mood="wave" aria-hidden="true"></div>
-        <h1>I’m Dew.</h1>
-        <p class="lede">
-          I live in your browser. I bully you about water, yank you toward
-          breakfast, lunch, snack, dinner, and a midnight bite — and if today
-          is a fasting day, I say so. Teams can keep the menu.
+        <h1 data-i18n="onboardTitle">I’m Dew. Call me Boond.</h1>
+        <p class="lede" data-i18n="onboardLede">
+          I live in your browser. I nag you for paani, ring the office thali, and if today is upvaas, I say so.
         </p>
+        <p class="field-label" data-i18n="langLabel">Language</p>
+        <div class="pills lang-pills" id="languages">
+          <button type="button" data-locale="en" class="on">English</button>
+          <button type="button" data-locale="hi">हिंदी</button>
+          <button type="button" data-locale="mr">मराठी</button>
+        </div>
         <label class="field">
-          What should I call you?
-          <input id="name" maxlength="18" placeholder="legend" />
+          <span data-i18n="nameLabel">What should I call you?</span>
+          <input id="name" maxlength="18" placeholder="yaar" />
         </label>
-        <p class="field-label">How often should I bother you?</p>
+        <p class="field-label" data-i18n="intervalLabel">How often should I bother you?</p>
         <div class="pills" id="intervals">
-          <button data-interval="30">Coffee</button>
-          <button data-interval="45" class="on">Meetings</button>
-          <button data-interval="60">Deep work</button>
-          <button data-interval="90">Cactus mode</button>
+          <button data-interval="30" data-i18n="int30">Chai</button>
+          <button data-interval="45" class="on" data-i18n="int45">Standup</button>
+          <button data-interval="60" data-i18n="int60">Deep work</button>
+          <button data-interval="90" data-i18n="int90">Sanyasi</button>
         </div>
-        <p class="field-label">Pick my personality</p>
+        <p class="field-label" data-i18n="vibeLabel">Pick my vibe</p>
         <div class="pills" id="personalities">
-          <button data-personality="gentle">Soft</button>
-          <button data-personality="roast" class="on">Roast</button>
-          <button data-personality="chaos">Chaos</button>
+          <button data-personality="gentle" data-i18n="vibeGentle">Naram</button>
+          <button data-personality="roast" class="on" data-i18n="vibeRoast">Teekha</button>
+          <button data-personality="chaos" data-i18n="vibeChaos">Filmy</button>
         </div>
-        <button id="start" class="primary">Let Dew move in</button>
+        <button id="start" class="primary" data-i18n="start">Let Dew move in</button>
       </section>
 
       <section id="home" class="screen hidden">
         <header>
           <div>
-            <p class="eyebrow" id="rank">Puddle</p>
-            <h1 id="hello">Hey.</h1>
+            <p class="eyebrow" id="rank">Boond</p>
+            <h1 id="hello">Arre, yaar.</h1>
           </div>
           <button id="settings-btn" class="ghost" title="Settings">⚙</button>
         </header>
 
         <div class="stage">
           <div id="dew" class="dew" data-mood="ok" title="Poke Dew"></div>
-          <p id="mood-tag" class="mood-tag">vibing</p>
+          <p id="mood-tag" class="mood-tag">mellow</p>
           <p id="status" class="bubble">Loading the drama…</p>
         </div>
 
@@ -61,15 +65,15 @@
         </div>
 
         <div id="fast-banner" class="fast-banner hidden">
-          <strong id="day-title">Fasting day</strong>
+          <strong id="day-title">Upvaas</strong>
           <span id="fast-reason"></span>
         </div>
 
         <div class="meal-card">
-          <p class="eyebrow" id="meal-label">Next plate</p>
+          <p class="eyebrow" id="meal-label">Next thali</p>
           <p id="meal-when">—</p>
           <div class="meal-actions">
-            <button id="ate" class="secondary">I ate</button>
+            <button id="ate" class="secondary">Kha liya</button>
             <button id="honor" class="secondary hidden">I’m fasting — skip food</button>
           </div>
         </div>
@@ -77,67 +81,73 @@
         <div class="stats">
           <div>
             <strong id="streak">0</strong>
-            <span>day streak</span>
+            <span id="streak-label">day streak</span>
           </div>
           <div>
             <strong id="next">—</strong>
-            <span>until next sip</span>
+            <span id="until-label">until next sip</span>
           </div>
         </div>
 
         <button id="sip" class="primary splash">I sipped</button>
-        <button id="snooze" class="secondary">Give me 10 minutes, Dew</button>
+        <button id="snooze" class="secondary">10 min, yaar</button>
       </section>
 
       <section id="settings" class="screen hidden">
         <header>
-          <h1>House rules</h1>
+          <h1 id="settings-title">House rules</h1>
           <button id="back" class="ghost">←</button>
         </header>
-        <p class="field-label">Nudge rhythm</p>
+        <p class="field-label" data-i18n="langLabel">Language</p>
+        <div class="pills lang-pills" id="set-languages">
+          <button type="button" data-locale="en" class="on">English</button>
+          <button type="button" data-locale="hi">हिंदी</button>
+          <button type="button" data-locale="mr">मराठी</button>
+        </div>
+        <p class="field-label" data-i18n="nudge">Nudge rhythm</p>
         <div class="pills" id="set-intervals">
           <button data-interval="30">30m</button>
           <button data-interval="45">45m</button>
           <button data-interval="60">60m</button>
           <button data-interval="90">90m</button>
         </div>
-        <p class="field-label">Dew’s vibe</p>
+        <p class="field-label" data-i18n="vibeLabel">Dew’s vibe</p>
         <div class="pills" id="set-personalities">
-          <button data-personality="gentle">Soft</button>
-          <button data-personality="roast">Roast</button>
-          <button data-personality="chaos">Chaos</button>
+          <button data-personality="gentle" data-i18n="vibeGentle">Naram</button>
+          <button data-personality="roast" data-i18n="vibeRoast">Teekha</button>
+          <button data-personality="chaos" data-i18n="vibeChaos">Filmy</button>
         </div>
         <label class="toggle">
           <input type="checkbox" id="overlay" checked />
-          Let Dew appear on websites when you’re overdue for water or food
+          <span data-i18n="overlay">Let Dew appear on websites when you’re overdue for paani or food</span>
         </label>
 
-        <p class="field-label">Office meals (menu still lives in Teams)</p>
+        <p class="field-label" data-i18n="mealsLabel">Office meals (menu still lives in Teams)</p>
         <label class="toggle">
           <input type="checkbox" id="meals-on" checked />
-          Bell at breakfast, lunch, snack, dinner, midnight
+          <span data-i18n="mealsToggle">Bell at nashta, lunch, chai, dinner, midnight</span>
         </label>
         <div id="meal-times" class="meal-times"></div>
 
-        <p class="field-label">Today is a fasting day</p>
+        <p class="field-label" data-i18n="fastToday">Today is upvaas</p>
         <label class="toggle">
           <input type="checkbox" id="fast-today" />
-          Mark today — Dew will caution observers not to eat
+          <span data-i18n="fastTodayToggle">Mark today — Dew will caution observers not to eat</span>
         </label>
         <label class="field">
-          What kind of fast?
+          <span data-i18n="fastKind">What kind of fast?</span>
           <input id="fast-label" maxlength="40" placeholder="Ekadashi, Navratri, office vrath…" />
         </label>
 
-        <p class="field-label">Weekly fasts</p>
+        <p class="field-label" data-i18n="weekly">Weekly fasts</p>
         <div class="pills" id="weekdays"></div>
 
         <label class="toggle">
           <input type="checkbox" id="observe" />
-          I personally observe these fasts — don’t push food at me
+          <span data-i18n="observe">I personally observe these fasts — don’t push food at me</span>
         </label>
 
-        <p class="field-label">Special fasting dates</p>
+        <p class="field-label" data-i18n="special">Special fasting dates</p>
         <div class="date-row">
           <input id="fast-date" type="date" />
           <input id="fast-date-label" maxlength="32" placeholder="Name" />
@@ -145,12 +155,12 @@
         </div>
         <div id="fast-list" class="fast-list"></div>
 
-        <p class="hint">
-          Dew does not replace the Power Automate menu. Dew just grabs people
-          who never open Teams. Same folder for Chrome and Edge.
+        <p class="hint" data-i18n="hint">
+          Dew does not replace the Power Automate menu. Same folder for Chrome and Edge.
         </p>
       </section>
     </main>
+    <script src="../i18n.js"></script>
     <script src="../meals.js"></script>
     <script src="../dew/dew.js"></script>
     <script src="popup.js"></script>

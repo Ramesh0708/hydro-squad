@@ -1,29 +1,76 @@
 .dew {
-  --dew-a: #dcffff;
-  --dew-b: #4fd4e0;
-  --dew-c: #148ea3;
-  width: 92px;
-  height: 118px;
+  --dew-a: #fff6d4;
+  --dew-b: #3ecfc4;
+  --dew-c: #0b6b6a;
+  --dew-ink: #2a1208;
+  width: 100px;
+  height: 132px;
+  padding-top: 18px;
   position: relative;
   animation: dew-bob 2.6s ease-in-out infinite;
   cursor: pointer;
 }
 
 .dew.big {
-  width: 110px;
-  height: 140px;
+  width: 118px;
+  height: 154px;
   margin: 8px auto 6px;
+}
+
+.dew .feather {
+  position: absolute;
+  top: 0;
+  left: 58%;
+  width: 22px;
+  height: 46px;
+  background: linear-gradient(180deg, #f0c14b 0%, #1a9b6c 32%, #1a6fb5 68%, #0a2a40 100%);
+  border-radius: 50% 50% 40% 40%;
+  transform: rotate(22deg);
+  box-shadow: -6px 4px 0 -2px #1a9b6c, 6px 8px 0 -4px #f0c14b;
+  z-index: 2;
+}
+
+.dew .feather::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f7e27a, #1f7a4a 55%, #16325c);
 }
 
 .dew-body {
   width: 100%;
   height: 100%;
   border-radius: 48% 48% 46% 46%;
-  background: radial-gradient(circle at 35% 20%, var(--dew-a), var(--dew-b) 42%, var(--dew-c));
-  box-shadow: inset -12px -18px 20px rgba(8, 50, 58, 0.25), 0 18px 40px rgba(0, 0, 0, 0.28);
+  background:
+    radial-gradient(circle at 32% 18%, var(--dew-a), var(--dew-b) 46%, var(--dew-c));
+  box-shadow:
+    inset -12px -18px 20px rgba(20, 20, 40, 0.28),
+    0 18px 40px rgba(40, 10, 20, 0.32);
   position: relative;
   overflow: hidden;
   transition: background 0.35s ease, filter 0.35s ease;
+}
+
+.dew .mala {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 72%;
+  height: 8px;
+  border-radius: 999px;
+  background: repeating-linear-gradient(
+    90deg,
+    #f0c14b 0 6px,
+    #c0392b 6px 8px,
+    #f0c14b 8px 14px,
+    #fff8e4 14px 16px
+  );
+  opacity: 0.9;
 }
 
 .dew .shine {
@@ -37,12 +84,35 @@
   transform: rotate(-18deg);
 }
 
+.dew .tilak {
+  position: absolute;
+  top: 26%;
+  left: 50%;
+  width: 7px;
+  height: 14px;
+  margin-left: -3.5px;
+  background: linear-gradient(180deg, #f0c14b 0 28%, #c0392b 28%);
+  border-radius: 3px;
+  z-index: 3;
+}
+
+.dew .nath {
+  position: absolute;
+  top: 54%;
+  left: 31%;
+  width: 7px;
+  height: 7px;
+  border: 1.6px solid #f0c14b;
+  border-radius: 50%;
+  z-index: 3;
+}
+
 .dew .eye {
   position: absolute;
   top: 42%;
   width: 11px;
   height: 16px;
-  background: #083038;
+  background: var(--dew-ink);
   border-radius: 8px;
   overflow: hidden;
 }
@@ -60,7 +130,7 @@
   width: 4px;
   height: 5px;
   margin: 4px 0 0 5px;
-  background: #e8fff8;
+  background: #fff6d4;
   border-radius: 50%;
 }
 
@@ -69,7 +139,7 @@
   top: 34%;
   width: 14px;
   height: 3px;
-  background: #083038;
+  background: var(--dew-ink);
   border-radius: 4px;
   opacity: 0.9;
 }
@@ -91,7 +161,7 @@
   width: 16px;
   height: 8px;
   margin-left: -8px;
-  border: 2.5px solid #083038;
+  border: 2.5px solid var(--dew-ink);
   border-top: 0;
   border-radius: 0 0 12px 12px;
 }
@@ -101,7 +171,7 @@
   top: 58%;
   width: 10px;
   height: 6px;
-  background: rgba(255, 120, 140, 0.45);
+  background: rgba(232, 90, 70, 0.5);
   border-radius: 50%;
   opacity: 0;
 }
@@ -114,9 +184,40 @@
   right: 16%;
 }
 
+.dew .hands {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 10%;
+  height: 26px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dew .hand {
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 22px;
+  background: linear-gradient(180deg, var(--dew-b), var(--dew-c));
+  border-radius: 40% 40% 30% 30%;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.dew .hand.left {
+  left: 4%;
+  transform: rotate(-28deg);
+}
+
+.dew .hand.right {
+  right: 4%;
+  transform: rotate(28deg);
+}
+
 .dew .sweat,
 .dew .spark,
-.dew .steam {
+.dew .steam,
+.dew .diya {
   position: absolute;
   pointer-events: none;
   opacity: 0;
@@ -131,14 +232,20 @@
   border-radius: 80% 0 60% 40%;
 }
 
-.dew .spark {
+.dew .spark,
+.dew .diya {
   top: -6%;
-  left: 50%;
+  left: 28%;
   width: 10px;
   height: 10px;
-  margin-left: -5px;
   background: #fff59a;
   clip-path: polygon(50% 0, 62% 38%, 100% 50%, 62% 62%, 50% 100%, 38% 62%, 0 50%, 38% 38%);
+}
+
+.dew .diya {
+  left: auto;
+  right: 18%;
+  background: #ff8a3c;
 }
 
 .dew .steam {
@@ -168,9 +275,9 @@
 }
 
 .dew[data-mood="smug"] {
-  --dew-a: #e7fff4;
+  --dew-a: #fff4c8;
   --dew-b: #7ee0c4;
-  --dew-c: #1a9b86;
+  --dew-c: #1a7a62;
 }
 
 .dew[data-mood="smug"] .brow.left {
@@ -189,9 +296,9 @@
 }
 
 .dew[data-mood="love"] {
-  --dew-a: #fff0f6;
-  --dew-b: #ff9ec4;
-  --dew-c: #e45d8c;
+  --dew-a: #ffe8f0;
+  --dew-b: #e56b8a;
+  --dew-c: #a8325a;
   animation: dew-bob 1.4s ease-in-out infinite;
 }
 
@@ -201,7 +308,9 @@
   opacity: 1;
 }
 
-.dew[data-mood="love"] .spark {
+.dew[data-mood="love"] .spark,
+.dew[data-mood="festive"] .spark,
+.dew[data-mood="festive"] .diya {
   opacity: 1;
   animation: dew-spark 0.9s ease-in-out infinite;
 }
@@ -211,39 +320,50 @@
   width: 20px;
   height: 12px;
   margin-left: -8px;
-  background: #083038;
+  background: var(--dew-ink);
   border: 0;
   border-radius: 0 0 16px 16px;
 }
 
 .dew[data-mood="happy"] {
-  --dew-a: #ffffff;
-  --dew-b: #8cf0c8;
-  --dew-c: #2fb89a;
+  --dew-a: #fffbe8;
+  --dew-b: #7ee0a8;
+  --dew-c: #1a8a5a;
   animation: dew-pop 0.55s ease, dew-bob 1.6s ease-in-out 0.55s infinite;
 }
 
 .dew[data-mood="festive"] {
-  --dew-a: #fff7d6;
-  --dew-b: #ffd36a;
-  --dew-c: #e08a2a;
+  --dew-a: #fff4c4;
+  --dew-b: #ee7b2a;
+  --dew-c: #c0392b;
   animation: dew-bob 1.5s ease-in-out infinite;
-}
-
-.dew[data-mood="festive"] .spark {
-  opacity: 1;
-  animation: dew-spark 0.8s ease-in-out infinite;
 }
 
 .dew[data-mood="festive"] .blush {
   opacity: 1;
 }
 
+.dew[data-mood="festive"] .hands,
+.dew[data-mood="wave"] .hands,
+.dew[data-mood="love"] .hands {
+  opacity: 1;
+}
+
+.dew[data-mood="wave"] .hand.left,
+.dew[data-mood="festive"] .hand.left {
+  transform: rotate(-8deg) translate(6px, -4px);
+}
+
+.dew[data-mood="wave"] .hand.right,
+.dew[data-mood="festive"] .hand.right {
+  transform: rotate(8deg) translate(-6px, -4px);
+}
+
 .dew[data-mood="festive"] .mouth {
   width: 20px;
   height: 12px;
   margin-left: -8px;
-  background: #083038;
+  background: var(--dew-ink);
   border: 0;
   border-radius: 0 0 16px 16px;
 }
@@ -251,7 +371,7 @@
 .dew[data-mood="fasting"] {
   --dew-a: #fff6e4;
   --dew-b: #f0c27a;
-  --dew-c: #b86a24;
+  --dew-c: #8a4a18;
   animation: dew-bob 3.4s ease-in-out infinite;
 }
 
@@ -271,7 +391,7 @@
 .dew[data-mood="hungry"] {
   --dew-a: #fff3d6;
   --dew-b: #ffb347;
-  --dew-c: #e0672f;
+  --dew-c: #d35400;
   animation: dew-shake 0.9s ease-in-out infinite;
 }
 
@@ -280,13 +400,13 @@
   height: 12px;
   border-radius: 50%;
   border: 0;
-  background: #083038;
+  background: var(--dew-ink);
 }
 
 .dew[data-mood="sleepy"] {
-  --dew-a: #dce8ff;
-  --dew-b: #8aa4d8;
-  --dew-c: #4b5f96;
+  --dew-a: #e8d8ff;
+  --dew-b: #6a5a9e;
+  --dew-c: #2c1a4a;
   animation: dew-bob 4.4s ease-in-out infinite;
 }
 
@@ -333,8 +453,8 @@
 
 .dew[data-mood="thirsty"] {
   --dew-a: #fff4e8;
-  --dew-b: #ffb08a;
-  --dew-c: #e56b63;
+  --dew-b: #ee7b2a;
+  --dew-c: #c0392b;
   animation: dew-shake 0.7s ease-in-out infinite;
 }
 
@@ -352,14 +472,14 @@
   top: 62%;
   height: 10px;
   border-radius: 12px 12px 0 0;
-  border: 2.5px solid #083038;
+  border: 2.5px solid var(--dew-ink);
   border-bottom: 0;
 }
 
 .dew[data-mood="dramatic"] {
   --dew-a: #ffe8f2;
-  --dew-b: #ff8fb0;
-  --dew-c: #c43d6a;
+  --dew-b: #e56b8a;
+  --dew-c: #7a1f4a;
   animation: dew-wobble 0.55s ease-in-out infinite;
 }
 
@@ -375,7 +495,7 @@
   height: 14px;
   border-radius: 50%;
   border: 0;
-  background: #083038;
+  background: var(--dew-ink);
 }
 
 .dew[data-mood="dramatic"] .sweat {
@@ -384,8 +504,8 @@
 
 .dew[data-mood="feral"] {
   --dew-a: #fff3c4;
-  --dew-b: #ff7a45;
-  --dew-c: #c42828;
+  --dew-b: #ee7b2a;
+  --dew-c: #8b1a1a;
   animation: dew-rage 0.35s linear infinite;
   filter: saturate(1.25);
 }
@@ -421,8 +541,7 @@
   border-radius: 50%;
   width: 14px;
   height: 14px;
-  background:
-    repeating-conic-gradient(#083038 0 25%, #e8fff8 0 50%);
+  background: repeating-conic-gradient(var(--dew-ink) 0 25%, #fff6d4 0 50%);
   animation: dew-spin 0.6s linear infinite;
 }
 
@@ -431,7 +550,7 @@
   height: 8px;
   border-radius: 50%;
   border: 0;
-  background: #083038;
+  background: var(--dew-ink);
 }
 
 .dew[data-mood="sideeye"] .eye.left,
