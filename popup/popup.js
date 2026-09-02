@@ -48,20 +48,6 @@ function formatWait(data) {
   return m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`;
 }
 
-function dropSound() {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
-  osc.type = "sine";
-  osc.frequency.setValueAtTime(880, ctx.currentTime);
-  osc.frequency.exponentialRampToValueAtTime(220, ctx.currentTime + 0.18);
-  gain.gain.setValueAtTime(0.08, ctx.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
-  osc.connect(gain).connect(ctx.destination);
-  osc.start();
-  osc.stop(ctx.currentTime + 0.24);
-}
-
 function setMood(el, mood) {
   el.dataset.mood = mood;
   state.mood = mood;
@@ -217,7 +203,6 @@ $("start").addEventListener("click", async () => {
 });
 
 $("sip").addEventListener("click", async () => {
-  dropSound();
   pokeLock = true;
   render(await send("sip"), true);
   setTimeout(() => {

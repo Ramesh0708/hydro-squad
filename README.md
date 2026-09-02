@@ -1,24 +1,30 @@
 # Hydro Squad
 
-A Chromium extension that works in **Google Chrome** and **Microsoft Edge**. Your friends get Dew — a dramatic water-droplet roommate who lives in the toolbar, roasts them when they’re dry, and pops onto the page like a tiny Tamagotchi.
+A Chromium extension for **Google Chrome** and **Microsoft Edge**. Dew is a dramatic water-droplet roommate in the toolbar: water reminders, office meal bells, and fasting/festival cautions.
 
-No account. No server. Just load it once.
+No account. No server. Data stays on the machine. Silent — Dew uses the popup, badge, notifications, and on-page overlay. No extension sounds.
 
-## Why it’s fun on first open
+Current version: **1.3.5** · [github.com/Ramesh0708/hydro-squad](https://github.com/Ramesh0708/hydro-squad)
 
-- Dew introduces themselves in 10 seconds, not a settings form
-- Three personalities: Soft, Roast, Chaos
-- One-tap **I sipped** with a little drop sound
-- When they’re overdue, Dew appears on websites until they sip or snooze
-- Ranks from Puddle → Hydrolegend, plus a daily streak
-- Dew’s face actually changes: wink, smug, sleepy, judging, dramatic, feral — poke him
-- GIFs work in the popup and on-page Dew; toolbar icons and desktop notifications stay still (first frame only), so Dew is CSS-animated instead
-- Office meals at **8:15, 12:30, 5:00, 8:30, 12:00** — Dew yanks people who never open Teams
-- Fasting days: Dew still rings the bell, then cautions observers not to eat
+## What Dew does
+
+- Introduces themselves in about 10 seconds (name, nudge interval, personality)
+- Personalities: **Soft**, **Roast**, **Chaos**
+- **I sipped** logs a sip, updates the daily meter, and keeps a streak (Puddle → Hydrolegend)
+- **Give me 10 minutes** snoozes the water nag
+- When water or a meal is overdue, Dew can appear on http(s) pages until you sip, eat, honor a fast, or snooze
+- Faces change (wink, smug, sleepy, judging, dramatic, feral). Poke Dew
+- Toolbar icons and desktop notifications stay still (first frame). Dew is CSS-animated in the popup and overlay
+- Office meals in **local time**: breakfast **8:15**, lunch **12:30**, snack **17:00**, dinner **20:30**, midnight **00:00**
+- Fasting/festival days from packed `office-fasts.json` (Hindu, Muslim, Jain, Sikh, Jewish, Christian, Buddhist dates among others). Observers get a caution; everyone else is still told to eat
+- Mark today as a fast, weekly fasts, extra dates, or “I personally observe”
+- Teams / Power Automate still owns the canteen menu. Dew only grabs people who never open Teams
+
+Clicking a water notification counts as a sip. Meal notifications mark that meal eaten (or honor a fast if you observe).
 
 ## Install (unpacked)
 
-Same folder for both browsers.
+Same folder for both browsers. After you pull updates, open the extensions page and click **Reload**.
 
 ### Chrome
 
@@ -38,13 +44,11 @@ Pin the icon. Click it. Let Dew move in.
 
 ## How to show friends
 
-1. Send them this folder (zip is fine)
+1. Send them this repo or a zip of the folder
 2. They load unpacked once
 3. They pick Roast or Chaos
 4. Dew handles the rest
 
-Clicking a desktop notification counts as a sip.
-
 ## Privacy
 
-Everything stays in `chrome.storage.local` on that computer. No tracking, no analytics.
+Everything stays in `chrome.storage.local` on that computer. Permissions are `storage`, `alarms`, and `notifications` only. No tracking, no analytics.
